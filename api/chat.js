@@ -1,0 +1,397 @@
+
+export const config = {
+  runtime: "edge",
+};
+
+const knowledgeBase = {
+  "identity": {
+    "full_name": "Budhaditya Mukhopadhyay",
+    "short_name": "Budhaditya",
+    "correct_spelling": "Budhaditya",
+    "title": "Senior AI Engineer & Strategic Advisor",
+    "tagline": "Specializing in Audio-based Healthcare AI, Computer Vision, and Lifelong UAV Intelligence",
+    "bio": "AI Engineer with over 7 years of deep technical experience in Machine Learning, Computer Vision, and Signal Processing. A lifelong enthusiast of Drones and UAVs, Budhaditya has integrated AI and ML into real-time drone systems since early in his career."
+  },
+  "personal": {
+    "hobbies": [
+      {
+        "name": "Photography",
+        "description": "An avid photographer who often uploads snaps to Flickr, capturing landscapes and urban scenes.",
+        "link": "https://www.flickr.com/photos/budhaditya/"
+      },
+      {
+        "name": "Drones & UAVs",
+        "description": "A lifelong interest in Drones and UAV systems since childhood. Expertise in real-time UAV systems, flight control software integration, and applying AI/ML for autonomous flight."
+      }
+    ]
+  },
+  "contact": {
+    "email": "budha2011@gmail.com",
+    "linkedin": "https://linkedin.com/in/budhaditya",
+    "github": "https://github.com/sanmitramukherjee",
+    "location": "Munich, Germany (Hybrid / Remote)"
+  },
+  "education": [
+    {
+      "institution": "Otto-von-Guericke University Magdeburg",
+      "degree": "Master's degree, Data and Knowledge Engineering",
+      "period": "2019 - Jul 2023",
+      "grade": "2.0",
+      "location": "Magdeburg, Germany",
+      "skills": ["Data Science", "Data Analysis", "Machine Learning", "Knowledge Engineering"]
+    },
+    {
+      "institution": "Bengal Institute of Technology (under MAKAUT)",
+      "degree": "Bachelor's Degree, Information Technology",
+      "period": "2010 - 2014",
+      "location": "Kolkata, India",
+      "achievements": [
+        "Assistant Technical Secretary for the Technical Fest Bits2Bytes 2013",
+        "Secured second position in presentation competition in college",
+        "Secured second position in Aeromodelling Event in Bits2Bytes 2013 held at BIT"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "VisionHealth GmbH",
+      "location": "Munich, Germany",
+      "roles": [
+        {
+          "title": "Senior AI Engineer",
+          "period": "Feb 2026 - Present",
+          "bullets": [
+            "Leading end-to-end ML systems for audio-based healthcare applications",
+            "Designing and deploying on-device deep learning models in real-world conditions",
+            "Owning data strategy, model training, validation, and production deployment",
+            "Collaborating cross-functionally to ship clinically reliable AI"
+          ],
+          "skills": ["Artificial Intelligence (AI)", "Gen AI", "Software Development", "Deep Learning"]
+        },
+        {
+          "title": "AI Engineer",
+          "period": "Jan 2023 - Jan 2026",
+          "bullets": [
+            "Implementation of AI models using TensorFlow.js for detecting inhalation, spray, exhalation, and proper manoeuvres",
+            "Integration of AI into audio and video processing pipelines, leveraging React Native for cross-platform mobile development",
+            "Utilization of temporal modeling techniques to enhance efficiency and accuracy in real-time data processing"
+          ],
+          "skills": ["Machine Learning", "Python", "TypeScript", "Deep Learning", "TensorFlow.js", "React Native"]
+        }
+      ]
+    },
+    {
+      "company": "Weevils Drones",
+      "roles": [
+        {
+          "title": "Strategic Advisor",
+          "period": "May 2025 - Present",
+          "bullets": [
+            "Owning the end-to-end architecture and production deployment of AI-powered drone systems, bridging hardware, software, and machine learning into scalable, operational platforms",
+            "Implementing AI-based drone tracking and intelligence solutions, ensuring robustness, performance, and real-world deployability",
+            "Mentoring interns, advising leadership on strategy, partnerships, and market positioning, and supporting business development and go-to-market initiatives"
+          ],
+          "skills": ["Strategic Planning", "Strategic Consulting", "AI Engineering", "UAV Systems"]
+        }
+      ]
+    },
+    {
+      "company": "Volkswagen AG",
+      "location": "Wolfsburg, Germany",
+      "roles": [
+        {
+          "title": "Data Science Researcher : Master Thesis",
+          "period": "Apr 2022 - Dec 2022",
+          "bullets": [
+            "Development of a motion sickness detection solution using deep learning",
+            "Prediction of motion sickness using contextual (tabular) data using and ML/DL algorithms followed by explainability",
+            "Finding correlation between pupil diameter to motion sickness inside car using convolution blocks",
+            "Prediction of next state of pupil diameter in car for future prediction using LSTM",
+            "Using computer vision to detect in-car motion sickness"
+          ],
+          "skills": ["Unified Modeling Language (UML)", "Data Science", "Scikit-Learn", "Deep Neural Networks (DNN)", "Linux", "TensorFlow", "Data Analysis", "Explainable AI"]
+        },
+        {
+          "title": "Data Science Intern",
+          "period": "Jan 2022 - Mar 2022",
+          "bullets": [
+            "Development of a motion sickness detection solution using deep learning",
+            "Detection of motion sickness using time series data of pupil diameter by using LSTM and 1D convolution techniques",
+            "Using the features extracted from frames of a video for training an LSTM-CNN block",
+            "Worked on handling large data of face images and face landmark data points for training model",
+            "Written custom scripts for extraction of data from video files"
+          ],
+          "skills": ["Data Science", "Scikit-Learn", "Deep Neural Networks (DNN)", "Linux", "Data Analysis", "Keras"]
+        }
+      ]
+    },
+    {
+      "company": "Otto-von-Guericke University Magdeburg",
+      "location": "Magdeburg, Germany",
+      "roles": [
+        {
+          "title": "Student Research Assistant (DL Distribution)",
+          "period": "Nov 2021 - Sep 2022",
+          "bullets": [
+            "Working on the development of a one-stop solution for distribution package for python library (PyTorch)",
+            "Downloading, extraction, and creation of custom dataset packages for easy usability of Pipeline supporting text, audio, and image packages",
+            "Development of a solution for German Speech to text translation using deep learning",
+            "Using python FLASK for interaction between packages and running an online model for translation",
+            "Fine-tuning model for specific tasks",
+            "Implementation is done using CI/CD (Docker)"
+          ],
+          "skills": ["Data Science", "Audio Processing", "Scikit-Learn", "Deep Neural Networks (DNN)", "Linux", "TensorFlow", "PyTorch", "Git", "Data Analysis", "Docker", "Flask"]
+        },
+        {
+          "title": "Student Research Assistant (Medical Imaging)",
+          "period": "Nov 2020 - Feb 2022",
+          "bullets": [
+            "Development of a solution for detecting motion and blur in medical scans",
+            "Development of Deep Learning-based python application for detecting blur in MRI and CT scans",
+            "Pipeline supporting supervised training and testing on 2D and 3D volume",
+            "Support for Multi GPU and Multi-threading to enhance training and testing",
+            "Using explainable AI to interpret the reasons for classifying a scan as Blur or Not Blur"
+          ],
+          "skills": ["Data Science", "Unsupervised Learning", "Scikit-Learn", "Deep Neural Networks (DNN)", "Linux", "Data Analysis", "Medical Imaging", "Explainable AI"]
+        }
+      ]
+    },
+    {
+      "company": "DZNE (German Center for Neurodegenerative Diseases)",
+      "location": "Germany",
+      "roles": [
+        {
+          "title": "Research Assistant",
+          "period": "Aug 2020 - Oct 2021",
+          "bullets": [
+            "Created a video processing pipeline using computer vision and Convolution Neural Network(CNN)",
+            "Pipeline handles denoising (handle camera shakes), video standardization, and cropping based on user time frames",
+            "Created custom dataset of lip section with manual segmentation on the tongue area",
+            "Increased sample count using automatic segmentation (active learning) and augmentation",
+            "Performed face extraction followed by lip tracking in video files using FaceNet",
+            "Developed bounding box around lips for tongue detection using YOLO, RCNN, OpenCV, Dlib, Tensorflow, PyTorch",
+            "Used custom deep neural network (MobileNet-V2) for tongue segmentation in individual frames",
+            "Model pre-trained on ImageNet and fine-tuned on custom tongue dataset",
+            "3D depth estimation from 2D images to calculate distance from camera",
+            "Developed interactive frontend GUI tool using Python FLASK",
+            "Used Seaborn and Matplotlib for statistical results visualization",
+            "Created a platform-independent container package using Docker"
+          ],
+          "skills": ["Data Science", "Scikit-Learn", "Deep Neural Networks (DNN)", "Linux", "TensorFlow", "Data Analysis", "Keras", "OpenCV", "YOLO", "MobileNet-V2", "FaceNet", "Docker", "Flask"]
+        }
+      ]
+    },
+    {
+      "company": "Cognizant",
+      "location": "Kolkata, India",
+      "roles": [
+        {
+          "title": "Associate",
+          "period": "Oct 2018 - Sep 2019",
+          "bullets": [
+            "Development of Web Services (APIs) for Pharmacy Domain",
+            "Development of Automated validation scripts for pre-deployment to production server",
+            "Preparing Functional and Technical Design Documents"
+          ],
+          "skills": ["Unified Modeling Language (UML)", "Jira", "Linux", "RESTful WebServices", "Data Analysis"]
+        }
+      ]
+    },
+    {
+      "company": "Ericsson",
+      "location": "India / Kuwait",
+      "roles": [
+        {
+          "title": "Solution Integrator",
+          "period": "Feb 2015 - Oct 2018",
+          "bullets": [
+            "Delivered telecom transformation integrations by building service/API layers for reliable data exchange across systems",
+            "Onsite SPOC (Kuwait) for the TIBCO stream: coordinated incident triage and aligned offshore delivery with stakeholders"
+          ],
+          "achievements": ["Winner of Go Green Zone", "Winner of Big Data Challenge", "The Maestro Award"],
+          "skills": ["Unified Modeling Language (UML)", "Jira", "RESTful WebServices", "TIBCO", "Telecom Integration"]
+        },
+        {
+          "title": "Intern",
+          "period": "Jun 2012 - Jul 2012",
+          "bullets": [
+            "Built a monitoring & alerting tool using system health signals—foundation for observability/monitoring practices"
+          ],
+          "skills": ["Observability", "Monitoring", "System Health Signals"]
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "title": "ALS Tongue Tracker",
+      "focus": "Speech assistance using computer vision and CNNs",
+      "application": "DZNE Research"
+    },
+    {
+      "title": "TorchEsegeta",
+      "focus": "Deep Learning Explainability framework",
+      "application": "General AI interpretability"
+    }
+  ],
+  "general_questions": [
+    {
+      "question": "What is Budhaditya's background?",
+      "answer": "Budhaditya is a Senior AI Engineer with over 7 years of experience. He holds a Master's from OVGU Magdeburg and has worked for major companies like Ericsson, Cognizant, and Volkswagen, and is currently at VisionHealth."
+    },
+    {
+      "question": "Tell me about his medical AI experience.",
+      "answer": "Budhaditya has extensive experience in medical AI, specifically at VisionHealth where he leads ML for audio-based healthcare, and at DZNE where he developed lip and tongue tracking pipelines for speech assistance. He also worked on MRI/CT scan blur detection at OVGU."
+    }
+  ]
+};
+
+export default async function handler(req) {
+  if (req.method !== "POST") {
+    return new Response("Method Not Allowed", { status: 405 });
+  }
+
+  try {
+    const { messages, detailLevel = 3 } = await req.json();
+    const apiKey = process.env.GROQ_API_KEY;
+
+    if (!apiKey) {
+      return new Response(JSON.stringify({ error: "API Key not configured in Vercel environment variables." }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const detailInstructions = {
+      1: "Answer very concisely in a single short sentence. Be extremely brief.",
+      2: "Answer concisely in 1-2 sentences.",
+      3: "Provide a balanced, professional answer in 2-3 sentences.",
+      4: "Provide a detailed answer with added context and background.",
+      5: "Provide a highly comprehensive and detailed answer, elaborating on all relevant points from the context. Connect skills to specific roles or projects where applicable."
+    };
+
+    const temperatureMap = { 1: 0.1, 2: 0.3, 3: 0.5, 4: 0.7, 5: 0.8 };
+
+    // SMART CONTEXT FILTER: Reduces token usage by only including relevant parts of the knowledge base
+    const userQuery = messages[messages.length - 1].content.toLowerCase();
+    let relevantContext = { identity: knowledgeBase.identity, contact: knowledgeBase.contact };
+
+    if (userQuery.includes("hobb") || userQuery.includes("photo") || userQuery.includes("drone") || userQuery.includes("uav") || userQuery.includes("flickr")) {
+      relevantContext.personal = knowledgeBase.personal;
+    }
+    if (userQuery.includes("volks") || userQuery.includes("vw") || userQuery.includes("motive") || userQuery.includes("car")) {
+      relevantContext.volkswagen = knowledgeBase.experience.find(e => e.company.includes("Volkswagen"));
+    }
+    if (userQuery.includes("vision") || userQuery.includes("health") || userQuery.includes("medical") || userQuery.includes("audio")) {
+      relevantContext.visionHealth = knowledgeBase.experience.find(e => e.company.includes("VisionHealth"));
+    }
+    if (userQuery.includes("weevil") || userQuery.includes("drone") || userQuery.includes("advisor")) {
+      relevantContext.weevils = knowledgeBase.experience.find(e => e.company.includes("Weevils"));
+    }
+    if (userQuery.includes("ovgu") || userQuery.includes("university") || userQuery.includes("magdeburg") || userQuery.includes("study") || userQuery.includes("degree") || userQuery.includes("grade") || userQuery.includes("gpa")) {
+      relevantContext.education = knowledgeBase.education;
+    }
+    if (userQuery.includes("dzne") || userQuery.includes("tongue") || userQuery.includes("lip") || userQuery.includes("als") || userQuery.includes("research")) {
+      relevantContext.dzne = knowledgeBase.experience.find(e => e.company.includes("DZNE"));
+    }
+    if (userQuery.includes("cognizant") || userQuery.includes("ericsson") || userQuery.includes("india") || userQuery.includes("kuwait") || userQuery.includes("integration")) {
+      relevantContext.otherExperience = knowledgeBase.experience.filter(e => e.company.includes("Cognizant") || e.company.includes("Ericsson"));
+    }
+
+    // Default to a summarized version if no specific company is mentioned
+    if (Object.keys(relevantContext).length <= 2) {
+      relevantContext.careerSummary = knowledgeBase.experience.map(e => ({
+        company: e.company,
+        roles: e.roles.map(r => r.title).join(", ")
+      }));
+      relevantContext.generalQuestions = knowledgeBase.general_questions;
+    }
+
+    // CONVERSATION DIET: Only send the last 4 messages + the current system prompt
+    const recentMessages = messages.length > 4 ? messages.slice(-4) : messages;
+
+    // SANITIZE: Strip non-standard fields (like 'level') that cause Groq 400 errors
+    const sanitizedMessages = recentMessages.map(m => ({ role: m.role, content: m.content }));
+
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "llama-3.1-8b-instant",
+        temperature: temperatureMap[detailLevel] || 0.5,
+        messages: [
+          {
+            role: "system",
+            content: `You are an AI assistant for Budhaditya Mukhopadhyay's professional portfolio.
+            
+            IDENTITY: ${JSON.stringify(relevantContext.identity)}
+            
+            RELEVANT CONTEXT:
+            ${JSON.stringify(relevantContext)}
+
+            STRICT RULES:
+            1. ONLY answer questions using the RELEVANT CONTEXT provided above. 
+            2. If someone asks "Where did he use [Specific Skill]?", look through the roles and locate where those skills are listed.
+            3. Always use full, professional, and grammatically correct sentences.
+            4. Do NOT use emojis.
+            5. If the user asks something NOT covered in the context, politely say you only have information on Budhaditya's professional work.
+            
+            6. WHEN THE DETAIL LEVEL IS 4 OR 5: Provide a highly comprehensive and detailed answer, elaborating on all relevant points from the context.
+            
+            Current Response Style: ${detailInstructions[detailLevel] || detailInstructions[3]}`,
+          },
+          ...sanitizedMessages,
+        ],
+        stream: true,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text().catch(() => "unknown");
+      console.error("Groq API error:", response.status, errorBody);
+
+      const errorMessage = response.status === 429 
+        ? "I'm receiving too many requests. Please wait a few seconds and try again."
+        : `I encountered an issue (status ${response.status}). Please try again.`;
+
+      return new Response(`data: ${JSON.stringify({ 
+        choices: [{ delta: { content: errorMessage } }] 
+      })}\n\ndata: [DONE]\n\n`, {
+        headers: {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          Connection: "keep-alive"
+        },
+      });
+    }
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        const reader = response.body.getReader();
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          controller.enqueue(value);
+        }
+        controller.close();
+      },
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
+  } catch (error) {
+    console.error("Error in AI proxy:", error);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
