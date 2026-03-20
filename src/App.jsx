@@ -109,7 +109,7 @@ function ClassicContent({ theme, activeSection, setActiveSection, setMode, setIs
 
 function App() {
   const [mode, setMode] = useState("ai"); // 'ai' or 'classic'
-  const [theme, setTheme] = useState("dark"); // 'dark' or 'light'
+  const [theme, setTheme] = useState("light"); // 'dark' or 'light'
   const [messages, setMessages] = useState([]);
   const [activeSection, setActiveSection] = useState("hero");
   const [isEasterEgg, setIsEasterEgg] = useState(false);
