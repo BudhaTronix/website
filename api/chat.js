@@ -27,15 +27,15 @@ const knowledgeBase = {
   },
   "contact": {
     "email": "budha2011@gmail.com",
-    "linkedin": "https://linkedin.com/in/budhaditya",
-    "github": "https://github.com/sanmitramukherjee",
+    "linkedin": "https://www.linkedin.com/in/budhadityamukhopadhyay",
+    "github": "https://github.com/BudhaTronix",
     "location": "Munich, Germany (Hybrid / Remote)"
   },
   "education": [
     {
       "institution": "Otto-von-Guericke University Magdeburg",
       "degree": "Master's degree, Data and Knowledge Engineering",
-      "period": "2019 - Jul 2023",
+      "period": "Oct 2019 - Jul 2023",
       "grade": "2.0",
       "location": "Magdeburg, Germany",
       "skills": ["Data Science", "Data Analysis", "Machine Learning", "Knowledge Engineering"]
