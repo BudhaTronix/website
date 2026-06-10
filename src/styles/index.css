@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,11 +10,15 @@
   --text-primary: #f9fafb;
   --text-secondary: #9ca3af;
   --accent: #4f8ef7;
+  --accent-2: #8b5cf6;
+  --accent-3: #22d3ee;
   --accent-glow: rgba(79, 142, 247, 0.4);
+  --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-2));
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
   --ai-bubble-bg: #1e293b;
   --user-bubble-bg: #4f8ef7;
+  --aurora-opacity: 0.5;
 }
 
 .perspective-1000 {
@@ -25,13 +29,22 @@
   --bg-primary: #f2f2f2; /* Clean Ash */
   --bg-secondary: #ffffff;
   --text-primary: #0f172a;
-  --text-secondary: #334155; 
+  --text-secondary: #334155;
   --accent: #2563eb;
+  --accent-2: #7c3aed;
+  --accent-3: #0891b2;
   --accent-glow: rgba(37, 99, 235, 0.2);
+  --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-2));
   --glass-bg: rgba(255, 255, 255, 0.9);
   --glass-border: rgba(0, 0, 0, 0.05);
   --ai-bubble-bg: #e2e8f0;
   --user-bubble-bg: #2563eb;
+  --aurora-opacity: 0.14;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -39,6 +52,78 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.gradient-text {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Gradient-border glass card with hover glow */
+.glow-card {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glow-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px -8px var(--accent-glow);
+}
+
+/* Aurora background: fixed, CSS-only animated gradients behind classic mode */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-bg::before,
+.aurora-bg::after {
+  content: "";
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: var(--aurora-opacity);
+  will-change: transform;
+}
+
+.aurora-bg::before {
+  background: radial-gradient(circle at center, var(--accent) 0%, transparent 60%);
+  top: -25vmax;
+  left: -15vmax;
+  animation: aurora-drift-1 26s infinite alternate ease-in-out;
+}
+
+.aurora-bg::after {
+  background: radial-gradient(circle at center, var(--accent-2) 0%, transparent 60%);
+  bottom: -30vmax;
+  right: -15vmax;
+  animation: aurora-drift-2 32s infinite alternate ease-in-out;
+}
+
+@keyframes aurora-drift-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(12vmax, 10vmax) scale(1.15); }
+}
+
+@keyframes aurora-drift-2 {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(-12vmax, -8vmax) scale(0.95); }
 }
 
 @keyframes shimmer {
