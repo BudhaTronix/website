@@ -5,8 +5,8 @@ export default function Navbar({ mode, setMode, theme, setTheme, resetAI, active
   const toggleMode = () => setMode(mode === "ai" ? "classic" : "ai");
 
   const handleLogoClick = () => {
-    setMode("ai");
-    resetAI();
+    setMode("classic");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -47,15 +47,27 @@ export default function Navbar({ mode, setMode, theme, setTheme, resetAI, active
               </a>
             </li>
             <li>
-              <a 
-                href="#projects" 
+              <a
+                href="#experience"
                 className={`transition-all duration-300 border-b-2 ${
-                  activeSection === "projects" 
-                    ? "text-blue-500 border-blue-500" 
+                  activeSection === "experience"
+                    ? "text-blue-500 border-blue-500"
                     : "hover:text-blue-500 border-transparent"
                 }`}
               >
-                Expertise
+                Experience
+              </a>
+            </li>
+            <li>
+              <a
+                href="#projects"
+                className={`transition-all duration-300 border-b-2 ${
+                  activeSection === "projects"
+                    ? "text-blue-500 border-blue-500"
+                    : "hover:text-blue-500 border-transparent"
+                }`}
+              >
+                Projects
               </a>
             </li>
             <li>
@@ -99,6 +111,17 @@ export default function Navbar({ mode, setMode, theme, setTheme, resetAI, active
 
         {/* Toggles */}
         <div className="flex items-center gap-3 md:gap-4">
+          {/* CV Download */}
+          <a
+            href="/cv.pdf"
+            download="Budhaditya_Mukhopadhyay_CV.pdf"
+            className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-md transition hover:scale-105 hover:shadow-[0_0_15px_var(--accent-glow)]"
+            style={{ background: "var(--gradient-accent)" }}
+            title="Download CV (PDF)"
+          >
+            CV ↓
+          </a>
+
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}

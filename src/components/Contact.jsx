@@ -72,9 +72,10 @@ export default function Contact({ theme }) {
     <section
       id="services"
       className="py-16 md:py-24 px-4 sm:px-6 text-center overflow-hidden transition-colors"
-      style={{ backgroundColor: "var(--bg-primary)" }}
     >
-      <h2 className="text-3xl md:text-5xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>My Services</h2>
+      <h2 className="font-display text-3xl md:text-5xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>
+        My <span className="gradient-text">Services</span>
+      </h2>
 
       <motion.p 
         initial={{ opacity: 0, y: 10 }}
@@ -139,6 +140,34 @@ export default function Contact({ theme }) {
             ))}
           </ul>
         </motion.div>
+
+        {/* MOBILE: Contact row */}
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <span className="text-xs font-black uppercase tracking-[0.2em] opacity-70" style={{ color: "var(--text-primary)" }}>
+            Reach Out
+          </span>
+          <div className="flex items-center gap-6">
+            <a href="mailto:budha2011@gmail.com" title="Email Me" className="transition-all hover:scale-110">
+              <img src="/mail.svg" alt="Email" className="w-8 h-8" />
+            </a>
+            <a href="https://www.linkedin.com/in/budhadityamukhopadhyay/" target="_blank" rel="noopener noreferrer" title="LinkedIn" className="transition-all hover:scale-110">
+              <img src="/linkedin.svg" alt="LinkedIn" className="w-8 h-8" />
+            </a>
+            <a href="https://github.com/BudhaTronix" target="_blank" rel="noopener noreferrer" title="GitHub" className="transition-all hover:scale-110">
+              <img src="/github.svg" alt="GitHub" className={`w-8 h-8 ${theme === 'dark' ? 'invert' : ''}`} />
+            </a>
+            <a
+              href="https://scholar.google.com/citations?hl=en&user=UyFDbHAAAAAJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Google Scholar"
+              className="transition-all hover:scale-110"
+              style={{ color: "var(--text-primary)" }}
+            >
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* DESKTOP: Compact 3D Carousel & Contact Dock Integrated */}
@@ -276,11 +305,22 @@ export default function Contact({ theme }) {
                   className="transition-all hover:scale-125 hover:drop-shadow-[0_0_10px_#3b82f6] duration-300"
                   title="GitHub"
                 >
-                  <img 
-                    src="/github.svg" 
-                    alt="GitHub" 
-                    className={`w-9 h-9 transition-all ${theme === 'dark' ? 'invert' : ''}`} 
+                  <img
+                    src="/github.svg"
+                    alt="GitHub"
+                    className={`w-9 h-9 transition-all ${theme === 'dark' ? 'invert' : ''}`}
                   />
+                </a>
+
+                <a
+                  href="https://scholar.google.com/citations?hl=en&user=UyFDbHAAAAAJ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-all hover:scale-125 hover:drop-shadow-[0_0_10px_#3b82f6] duration-300"
+                  title="Google Scholar"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
                 </a>
               </div>
             </motion.div>

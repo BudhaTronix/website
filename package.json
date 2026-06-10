@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "node build.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cv": "node cv/generate.js"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

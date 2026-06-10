@@ -6,6 +6,7 @@ import { streamChat } from "../utils/chat";
 
 const suggestionChips = [
   { label: "About", query: "Who is Budhaditya?" },
+  { label: "GenAI Projects", query: "What GenAI projects have you built?" },
   { label: "Expertise", query: "Tell me about your drone work." },
   { label: "Skills", query: "What is your tech stack?" },
   { label: "Papers", query: "What research have you published?" },
@@ -188,7 +189,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
               </motion.h1>
               
               <motion.img
-                src="/images/ProfilePicture.png"
+                src="/images/photo.png"
                 alt="Budhaditya"
                 onClick={handleProfileClick}
                 initial={{ scale: isEasterEgg ? 1 : 0.8, opacity: isEasterEgg ? 1 : 0 }}
@@ -218,7 +219,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                 className="text-base sm:text-xl md:text-2xl font-medium transition-all duration-700" 
                 style={{ color: "var(--text-secondary)", animationDelay: isMorphing ? "0s" : "0.4s" }}
               >
-                AI Engineer · Strategic Advisor · Python Dev
+                Senior AI Engineer · GenAI &amp; Edge AI · Strategic Advisor
               </motion.p>
             </motion.div>
           ) : (

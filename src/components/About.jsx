@@ -2,28 +2,32 @@ import { motion } from "framer-motion";
 
 export default function About() {
   const paragraphs = [
-    "Hi! I'm Budhaditya Mukhopadhyay, an AI Engineer specializing in audio processing. I hold a Master’s degree in Data Science from Otto von Guericke University.",
-    "I focus on implementing, evaluating, and optimizing Machine Learning and Deep Learning algorithms, with particular expertise in medical image processing and computer vision.",
-    "Currently, I serve as a Strategic Advisor to Weevils Drones, an emerging UAV company in India, supporting AI-driven innovation, international partnerships, and strategic growth opportunities.",
-    "Previously, I gained 4.5 years of professional experience in IT, primarily focused on implementing web services using TIBCO products."
+    "Hi! I'm Budhaditya Mukhopadhyay, a Senior AI Engineer at VisionHealth GmbH in Munich, where I own the end-to-end AI architecture for audio and video healthcare applications — from data strategy and model training to on-device deployment of compact, real-time deep learning models that support clinical trials and the Kata inhalation app.",
+    "Beyond healthcare, I build GenAI systems — local-first LLM tooling, agent workflows, and AI-powered developer tools — and hold a Master's degree in Data and Knowledge Engineering from Otto von Guericke University Magdeburg.",
+    "I also serve as a Strategic Advisor to Weevils Drones, an emerging UAV company, where I design the software architecture for AI-powered drone systems and mentor a team of interns on AI, engineering, and product thinking.",
+    "Across 9+ years I've shipped AI and software in healthcare, automotive research at Volkswagen, medical computer vision at DZNE and OVGU, and enterprise systems — with 3 peer-reviewed publications in medical AI and explainability, and 10 students mentored along the way."
   ];
 
   const highlightWords = [
-    "AI Engineer",
-    "Machine Learning",
-    "Deep Learning",
-    "medical image processing",
+    "Senior AI Engineer",
+    "VisionHealth GmbH",
+    "GenAI",
+    "on-device deployment",
     "Strategic Advisor",
-    "Weevils Drones"
+    "Weevils Drones",
+    "3 peer-reviewed publications",
+    "Volkswagen",
+    "DZNE"
   ];
 
   return (
     <section
       id="about"
       className="py-20 px-6 max-w-4xl mx-auto text-center transition-colors"
-      style={{ backgroundColor: "var(--bg-primary)" }}
     >
-      <h2 className="text-3xl md:text-5xl font-bold mb-10" style={{ color: "var(--text-primary)" }}>About Me</h2>
+      <h2 className="font-display text-3xl md:text-5xl font-bold mb-10" style={{ color: "var(--text-primary)" }}>
+        About <span className="gradient-text">Me</span>
+      </h2>
 
       <div className="space-y-6 leading-relaxed text-left" style={{ color: "var(--text-secondary)" }}>
         {paragraphs.map((p, idx) => (

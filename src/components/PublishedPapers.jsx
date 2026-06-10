@@ -1,25 +1,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import knowledge from "../data/knowledge.json";
 
 export default function PublishedPapers({ theme }) {
-  const papers = [
-    {
-      title: "An Automated Tongue Tracker for Quantifying Bulbar Function in ALS",
-      desc: "Introduction: Bulbar symptoms, including difficulty swallowing and speaking, are common in amyotrophic lateral sclerosis (ALS) and other neurological disorders, such as stroke. The presence of bulbar symptoms provides important information regarding clinical outcomes, such as survival time after diagnosis. Nevertheless, there are currently no easily accessible, quantitative methods to measure bulbar function in patients....",
-      link: "https://doi.org/10.3389/fneur.2022.838191",
-    },
-    {
-      title: "TorchEsegeta: Framework for Interpretability and Explainability of Image-Based Deep Learning Models",
-      desc: "Clinicians are often very sceptical about applying automatic image processing approaches, especially deep learning-based methods, in practice. One main reason for this is the black-box nature of these approaches and the inherent problem of missing insights of the automatically derived decisions. In order to increase trust in these methods, this paper presents approaches that help to interpret and explain the results of deep learning algorithms...",
-      link: "https://www.mdpi.com/2076-3417/12/4/1834",
-    },
-  ];
+  const papers = knowledge.publications;
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="published-papers" className="py-16 md:py-20 px-4 sm:px-6 relative transition-colors" style={{ backgroundColor: "var(--bg-primary)" }}>
-      <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center" style={{ color: "var(--text-primary)" }}>Published Papers</h2>
+    <section id="published-papers" className="py-16 md:py-20 px-4 sm:px-6 relative transition-colors">
+      <h2 className="font-display text-3xl md:text-5xl font-bold mb-12 text-center" style={{ color: "var(--text-primary)" }}>
+        Published <span className="gradient-text">Papers</span>
+      </h2>
 
       <div className="flex flex-col md:flex-row max-w-5xl mx-auto relative gap-6">
         {/* Navigation */}
@@ -72,8 +64,17 @@ export default function PublishedPapers({ theme }) {
                 {papers[activeIndex].title}
               </h3>
 
+              <div className="flex flex-wrap items-center gap-2 mb-2 relative z-10">
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-white" style={{ background: "var(--gradient-accent)" }}>
+                  {papers[activeIndex].authorship}
+                </span>
+                <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                  {papers[activeIndex].venue} · {papers[activeIndex].year}
+                </span>
+              </div>
+
               <div className="w-full h-px my-1 z-10" style={{ background: "linear-gradient(to right, transparent, var(--accent), transparent)" }}></div>
-              
+
               <p className="text-sm mb-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                 {papers[activeIndex].desc}
               </p>
@@ -94,7 +95,7 @@ export default function PublishedPapers({ theme }) {
           </div>
 
           {/* Desktop */}
-          <div className="hidden md:block relative h-96">
+          <div className="hidden md:block relative h-[30rem]">
             {papers.map((paper, idx) => {
               const isActive = idx === activeIndex;
               const offset = idx - activeIndex;
@@ -137,8 +138,17 @@ export default function PublishedPapers({ theme }) {
 
                   {isActive && (
                     <>
+                      <div className="flex flex-wrap items-center gap-2 mb-2 relative z-10">
+                        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-white" style={{ background: "var(--gradient-accent)" }}>
+                          {paper.authorship}
+                        </span>
+                        <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                          {paper.venue} · {paper.year}
+                        </span>
+                      </div>
+
                       <div className="w-full h-px my-1 z-10" style={{ background: "linear-gradient(to right, transparent, var(--accent), transparent)" }}></div>
-                      
+
                       <p className="text-base mb-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                         {paper.desc}
                       </p>
@@ -162,6 +172,18 @@ export default function PublishedPapers({ theme }) {
             })}
           </div>
         </div>
+      </div>
+
+      <div className="text-center mt-10">
+        <a
+          href={knowledge.contact.scholar}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-semibold transition hover:translate-x-1"
+          style={{ color: "var(--accent)" }}
+        >
+          View all on Google Scholar →
+        </a>
       </div>
     </section>
   );
