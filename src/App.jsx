@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import MoreWork from "./components/MoreWork";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
@@ -100,6 +101,7 @@ function ClassicContent({ theme, activeSection, setActiveSection, setMode, setIs
       <div className="aurora-bg" aria-hidden="true" />
       <div className="relative z-10">
         <Hero theme={theme} setMode={setMode} setIsEasterEgg={setIsEasterEgg} isEasterEgg={isEasterEgg} />
+        <MoreWork theme={theme} />
         <About theme={theme} />
         <Experience theme={theme} />
         <Projects theme={theme} />
