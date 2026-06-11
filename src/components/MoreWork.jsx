@@ -5,29 +5,10 @@ import Reveal from "./ui/Reveal";
 
 export default function MoreWork({ theme }) {
   const [activeCard, setActiveCard] = useState(null);
+  const [activeDroneProject, setActiveDroneProject] = useState(null);
+  const [activeResearchProject, setActiveResearchProject] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [photos, setPhotos] = useState([]);
   const [lightboxIndex, setLightboxIndex] = useState(null);
-
-  useEffect(() => {
-    if (activeCard !== "photography") return;
-
-    const loadPhotos = async () => {
-      try {
-        const proxyUrl = "https://api.allorigins.win/raw?url=";
-        const flickrUrl =
-          "https://www.flickr.com/services/feeds/photos_public.gne?id=203002715@N07&format=json&nojsoncallback=1";
-
-        const res = await fetch(proxyUrl + encodeURIComponent(flickrUrl));
-        const data = await res.json();
-        setPhotos(data.items.slice(0, 20));
-      } catch (err) {
-        console.error("Error fetching images:", err);
-      }
-    };
-
-    loadPhotos();
-  }, [activeCard]);
 
   useEffect(() => {
     if (activeCard || lightboxIndex !== null) {
@@ -47,77 +28,146 @@ export default function MoreWork({ theme }) {
       if (e.key !== "Escape") return;
       if (lightboxIndex !== null) {
         setLightboxIndex(null);
+      } else if (activeDroneProject) {
+        setActiveDroneProject(null);
+      } else if (activeResearchProject) {
+        setActiveResearchProject(null);
       } else if (activeCard) {
         setActiveCard(null);
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [activeCard, lightboxIndex]);
+  }, [activeCard, activeDroneProject, activeResearchProject, lightboxIndex]);
 
   const projects = [
     {
+      id: "tumour-detection",
       name: "Weakly Supervised Tumour Detection in Liver using Deep Learning",
-      desc: [
-        "Project under: Prof. Dr Andreas Nürnberger; Supervisors: M.Sc. Soumick Chatterjee and Dr Naghmeh Mahmoodian",
-        "Working on MRI and CT of Liver to detect tumour followed by cancer detection",
-        "Training neural network from scratch using CHAOS dataset",
-        "Using knowledge distillation to implement semi-supervised learning",
-        "Using ANTsPy and 3DSlicer to perform intermodal image registration (CT to MRI)",
-        "Packages and APIs used: Scikit-learn, ANTsPy, PyTorch, OpenCV, TorchIO",
+      eyebrow: "Medical imaging research",
+      summary:
+        "A weakly supervised liver tumour detection workflow for MRI and CT data, built around registration, deep learning, and semi-supervised training.",
+      role: "Built a research pipeline for detecting liver tumours from cross-modal medical imaging data.",
+      stack: ["PyTorch", "OpenCV", "TorchIO", "ANTsPy", "3D Slicer", "CHAOS dataset"],
+      highlights: [
+        "Worked under Prof. Dr Andreas Nurnberger with supervision from M.Sc. Soumick Chatterjee and Dr Naghmeh Mahmoodian.",
+        "Processed liver MRI and CT scans with tumour detection as the downstream clinical task.",
+        "Used ANTsPy and 3D Slicer for intermodal image registration from CT to MRI.",
+        "Trained neural networks from scratch on CHAOS data and explored knowledge distillation for semi-supervised learning.",
       ],
-      skills: ["Data Analysis", "Data Science", "Unsupervised Learning", "Deep Neural networks(DNN)", "Linux"],
+      metrics: ["Domain: liver MRI and CT", "Learning setup: weak and semi-supervised", "Output: tumour localization workflow"],
+      diagram: ["MRI / CT scans", "Registration", "Preprocessing", "Model training", "Tumour signal"],
       link: "https://github.com/BudhaTronix/Weakly-Supervised-Tumour-Detection",
     },
     {
+      id: "xai-segmentation",
       name: "Interpretability Techniques for Deep Learning based Segmentation Models",
-      desc: [
-        "Project under: Prof. Dr Andreas Nürnberger; Supervisor: M.Sc. Soumick Chatterjee",
-        "Working on explainable AI using Captum models and custom-made models",
-        "Creating a one-stop package for all possible explainability models and creating a pipeline for the same",
-        "Packages and APIs used: PyTorch, Keras, TensorFlow, Captum, TorchRay",
-        "Project abstract published in ISMRM 2021",
+      eyebrow: "Explainable AI research",
+      summary:
+        "A research package and pipeline for interpreting segmentation models using attribution methods and custom explainability workflows.",
+      role: "Designed an explainability layer for deep learning segmentation models.",
+      stack: ["PyTorch", "Keras", "TensorFlow", "Captum", "TorchRay", "XAI"],
+      highlights: [
+        "Worked under Prof. Dr Andreas Nurnberger with supervision from M.Sc. Soumick Chatterjee.",
+        "Evaluated explainable AI methods using Captum, TorchRay, and custom-built interpretation models.",
+        "Built toward a one-stop package that can run multiple interpretability methods through a consistent pipeline.",
+        "The project abstract was published in ISMRM 2021.",
       ],
-      skills: ["Data Analysis", "Data Science", "TensorFlow", "Deep Neural networks(DNN)", "Linux"],
+      metrics: ["Domain: segmentation explainability", "Methods: attribution and saliency", "Publication: ISMRM 2021 abstract"],
+      diagram: ["Segmentation model", "Attribution method", "Heatmap output", "Pipeline wrapper", "Research report"],
       link: "https://www.mdpi.com/2076-3417/12/4/1834",
     },
     {
+      id: "classification-error-explorer",
       name: "Error Classification using Deep Learning",
-      desc: [
-        "Project under: Prof. Dr Sebastian Stober; Supervisor: PhD Andreas Krug",
-        "Creating front end web interface using Node.js for helping users to classify a misclassified instance correctly",
-        "Can be used by any industry to display images that are misclassified by a neural network and extend functionality to re-train the model with the new correctly classified image data",
-        "Creating backend APIs using FLASK",
-        "Using transfer learning and model finetuning to train the model on new correctly classified images from ObjectNet",
-        "Using Explainable AI to interpret the results of misclassification of a model",
-        "Packages and APIs used: TensorFlow-GPU, PyTorch, OpenCV, Captum",
+      eyebrow: "Human-in-the-loop AI",
+      summary:
+        "A web interface for inspecting misclassified images, correcting model errors, and feeding the corrected samples back into model fine-tuning.",
+      role: "Built an error-analysis tool for diagnosing and improving image classification models.",
+      stack: ["Node.js", "Flask", "TensorFlow-GPU", "PyTorch", "OpenCV", "Captum"],
+      highlights: [
+        "Worked under Prof. Dr Sebastian Stober with supervision from PhD Andreas Krug.",
+        "Created a frontend interface that helps users inspect and correctly label misclassified instances.",
+        "Implemented backend APIs in Flask and used ObjectNet data for transfer learning and fine-tuning experiments.",
+        "Used explainable AI to interpret why a model produced incorrect classifications.",
       ],
-      skills: ["Data Analysis", "Data Science", "Microsoft Office", "TensorFlow", "Unsupervised Learning", "Deep Neural networks(DNN)", "Linux"],
+      metrics: ["Data: ObjectNet", "Loop: inspect, relabel, retrain", "Goal: reduce model error through human feedback"],
+      diagram: ["Misclassified image", "Web review UI", "XAI signal", "Correct label", "Fine-tuned model"],
       link: "https://github.com/BudhaTronix/Classification-Error-Explorer",
     },
     {
+      id: "traffic-simulation",
       name: "Simulation Project (Road Traffic Simulation)",
-      desc: [
-        "Project with Otto Von Guericke University and City Government of Magdeburg",
-        "Project under: Dr.-Ing. Claudia Krull",
-        "Emulating a road intersection layout in Magdeburg into a simplified conceptual model",
-        "Developing a simulation program on the software AnyLogic",
+      eyebrow: "Urban systems simulation",
+      summary:
+        "A simplified AnyLogic model of a Magdeburg road intersection created for traffic scenario exploration with academic and city-government stakeholders.",
+      role: "Translated a real road intersection into a conceptual simulation model.",
+      stack: ["AnyLogic", "UML", "Simulation modelling", "Data analysis", "Scenario testing"],
+      highlights: [
+        "Project with Otto von Guericke University and the City Government of Magdeburg.",
+        "Worked under Dr.-Ing. Claudia Krull.",
+        "Converted an intersection layout in Magdeburg into a simplified conceptual model.",
+        "Developed the simulation program in AnyLogic for traffic-flow exploration.",
       ],
-      skills: ["Data Analysis", "Unified Modeling Language (UML)", "Microsoft Office"],
+      metrics: ["Domain: road traffic", "Model type: conceptual intersection model", "Tooling: AnyLogic simulation"],
+      diagram: ["Intersection layout", "Conceptual model", "AnyLogic agents", "Scenario run", "Traffic insight"],
       link: "",
     },
   ];
 
-  const dronesAutomation = {
-    description: ["Associated with an Indian Startup, Weevils Drones as their Strategic Advisor & AI Engineer."],
-    bullets: [
-      "Leading the project <i>GANDIVA</i>, an Anti-Drone System based on using kamikaze drones assisted by a complex AI/ML structure to intercept and neutralize intruder drones.",
-      "Deployed a User Interface to control up to 8 drones autonomously using a Ground Control Station (GCS) in Master-Slave configuration.",
-      "Working to establish autonomous communication between the Ground Control System and Drones using PymavLink and Python.",
-    ],
-    subheading: "Sound knowledge of:",
-    subbullets: ["Flight Controllers – Orange Cube, Blitz H7 Pro", "GPS – Here3+, Here4, RTK Units", "Data Radio Module – P900 Telemetry"],
-  };
+  const droneProjects = [
+    {
+      id: "fusioncore",
+      name: "FusionCore",
+      eyebrow: "Assignment and dispatch core",
+      summary:
+        "A Python communication layer that ingests radar telemetry, keeps an active intruder picture, and assigns intercept work to available GCS nodes.",
+      role: "Decision layer for the Weevilsdrone counter-drone stack.",
+      stack: ["Python", "MQTT", "ZeroMQ", "SQLite", "Threaded telemetry"],
+      highlights: [
+        "Subscribes to radar drone update batches, normalizes latitude, longitude, altitude, speed, bearing, and timestamp data, then stores the latest intruder state.",
+        "Runs an assignment engine that emits INTERCEPT commands for selected GCS nodes, with a prototype path from single-GCS operation to multi-GCS proximity matching.",
+        "Includes a telemetry publisher and SQLite-backed simulator for exercising drone position updates and GCS registration flows before hardware is connected.",
+        "Designed to pair with latch, allocation, neutralization, and fleet-summary feedback coming from the GCS layer.",
+      ],
+      metrics: ["Radar input: MQTT batches", "Dispatch: ZMQ PUB on port 5556", "Prototype loop: 1 Hz assignments"],
+      diagram: ["Radar feed", "MQTT ingest", "Intruder state", "Assignment engine", "ZMQ dispatch"],
+    },
+    {
+      id: "gcs",
+      name: "GCS: Ground Control Station",
+      eyebrow: "MAVLink execution layer",
+      summary:
+        "A headless Python GCS that receives FusionCore assignments, picks the nearest free defender, and flies the MAVLink intercept sequence.",
+      role: "Execution layer between FusionCore and physical or simulated defender drones.",
+      stack: ["Python", "pymavlink", "ZeroMQ", "SITL", "Docker"],
+      highlights: [
+        "Receives INTERCEPT assignments on a ZMQ subscriber and reports GCS_LATCH plus ALLOCATION feedback through a push socket.",
+        "Supports SITL TCP links and real shared serial links using port:sysid addressing, with defenders exposed as DEF_{sysid}.",
+        "Selects the closest idle defender by haversine distance, then runs ARM, TAKEOFF, chase, precision engagement, neutralization, and RTL.",
+        "Tracks recent intruder history for short-horizon position prediction and prints mission timing metrics after a successful intercept.",
+      ],
+      metrics: ["Feedback: latch and allocation events", "Neutralization threshold: 5 m", "Drone links: TCP SITL or serial MAVLink"],
+      diagram: ["FusionCore", "GCS allocator", "MAVLink hub", "Defender drone", "RTL feedback"],
+    },
+    {
+      id: "iff",
+      name: "LoRaIFF",
+      eyebrow: "Authenticated telemetry layer",
+      summary:
+        "A minimal Identification Friend or Foe system using LoRa radio, MAVLink position data, and HMAC-SHA256 packet authentication.",
+      role: "Friend-or-foe telemetry layer for live drone tracking.",
+      stack: ["ESP32 C++", "LoRa 433 MHz", "MAVLink", "HMAC-SHA256", "FastAPI", "Leaflet"],
+      highlights: [
+        "The drone ESP32 reads GLOBAL_POSITION_INT from the flight controller, packs raw MAVLink integers, signs the payload, and transmits a compact LoRa frame.",
+        "Ground reception supports either an ESP32 LoRa-to-USB bridge or direct SX1268 SPI reception on a Raspberry Pi.",
+        "The Pi receiver verifies per-drone HMAC keys, rejects replayed timestamps, and classifies packets as FRIEND, SPOOF, UNKNOWN, or REPLAY.",
+        "A FastAPI backend serves a live Leaflet map with status-colored markers and stale-track pruning.",
+      ],
+      metrics: ["Air packet: 25 bytes", "RF profile: 433 MHz, 125 kHz BW, SF9", "Ground UI: FastAPI GET /data"],
+      diagram: ["Flight controller", "ESP32 signer", "LoRa packet", "Pi auth", "Map UI"],
+    },
+  ];
 
   const cards = [
     { id: "projects", title: "Research & Academic Projects", hoverText: "Medical imaging, XAI, and deep learning research" },
@@ -125,94 +175,244 @@ export default function MoreWork({ theme }) {
     { id: "photography", title: "Photography", hoverText: "Sneak peek of my photography skills" },
   ];
 
-  const [palette, setPalette] = useState({});
+  const photographyPhotos = Array.from({ length: 47 }, (_, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    return {
+      thumb: `/photography/thumbs/photo-${number}.jpg`,
+      full: `/photography/large/photo-${number}.jpg`,
+      alt: `Photography ${number}`,
+    };
+  });
 
-  const extractDominantColor = (imgEl, index) => {
-    try {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      canvas.width = imgEl.width;
-      canvas.height = imgEl.height;
-      ctx.drawImage(imgEl, 0, 0);
-
-      const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      let r = 0,
-        g = 0,
-        b = 0;
-
-      for (let i = 0; i < data.length; i += 4 * 500) {
-        r += data[i];
-        g += data[i + 1];
-        b += data[i + 2];
-      }
-
-      r = Math.round(r / (data.length / 4 / 500));
-      g = Math.round(g / (data.length / 4 / 500));
-      b = Math.round(b / (data.length / 4 / 500));
-
-      setPalette((prev) => ({
-        ...prev,
-        [index]: `rgb(${r}, ${g}, ${b})`,
-      }));
-    } catch (err) {
-      console.log("Palette error:", err);
-    }
-  };
+  const selectedResearchProject = projects.find((project) => project.id === activeResearchProject);
+  const selectedDroneProject = droneProjects.find((project) => project.id === activeDroneProject);
 
   const PhotographySection = () => (
     <div className="max-w-6xl mx-auto text-left">
-      <h3 className="text-3xl font-semibold mb-8 tracking-wide" style={{ color: "var(--text-primary)" }}>
-        Photography Album
+      <p className="eyebrow mb-4">Photography</p>
+      <h3 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-4" style={{ color: "var(--text-primary)" }}>
+        Selected frames
       </h3>
+      <p className="max-w-2xl text-sm md:text-base leading-relaxed mb-10" style={{ color: "var(--text-secondary)" }}>
+        Travel, street, architecture, and quiet details from the road.
+      </p>
 
-      {photos.length === 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {Array(12)
-            .fill(0)
-            .map((_, i) => (
-              <div key={i} className="rounded-xl animate-pulse h-48" style={{ backgroundColor: "var(--bg-secondary)" }} />
-            ))}
-        </div>
-      ) : (
-        <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
-          {photos.map((photo, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className="relative rounded-xl overflow-hidden shadow-lg cursor-pointer break-inside-avoid group"
-              onClick={() => setLightboxIndex(i)}
-            >
-              <img
-                src={photo.media.m}
-                alt={photo.title}
-                className="w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                onLoad={(e) => extractDominantColor(e.target, i)}
-              />
-
-              {palette[i] && (
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-20 opacity-70 pointer-events-none"
-                  style={{
-                    background: `linear-gradient(to top, ${palette[i]}, transparent)`,
-                  }}
-                />
-              )}
-            </motion.div>
-          ))}
-        </div>
-      )}
-
-      <a
-        href="https://www.flickr.com/photos/203002715@N07/with/54860413158"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn-solid mt-10 inline-block px-6 py-3 text-sm"
-      >
-        View More on Flickr →
-      </a>
+      <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
+        {photographyPhotos.map((photo, i) => (
+          <motion.button
+            key={photo.thumb}
+            type="button"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: Math.min(i * 0.015, 0.45) }}
+            className="relative block w-full break-inside-avoid overflow-hidden rounded-lg border cursor-pointer group"
+            style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--bg-secondary)" }}
+            onClick={() => setLightboxIndex(i)}
+          >
+            <img
+              src={photo.thumb}
+              alt={photo.alt}
+              loading="lazy"
+              decoding="async"
+              className="w-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+            />
+          </motion.button>
+        ))}
+      </div>
     </div>
+  );
+
+  const DroneProjectDiagram = ({ project }) => (
+    <div className="rounded-xl border p-4" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--glass-bg)" }}>
+      <p className="font-mono-ui text-[11px] uppercase tracking-[0.2em] mb-4" style={{ color: "var(--text-secondary)" }}>
+        Project diagram
+      </p>
+      <div className="grid gap-3 md:grid-cols-5">
+        {project.diagram.map((step, idx) => (
+          <div key={step} className="relative min-h-[112px] rounded-lg border p-3 flex flex-col justify-between" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--bg-secondary)" }}>
+            <div className="font-mono-ui text-[10px] uppercase tracking-[0.16em]" style={{ color: "var(--text-secondary)" }}>
+              {String(idx + 1).padStart(2, "0")}
+            </div>
+            <div className="text-sm font-semibold leading-snug" style={{ color: "var(--text-primary)" }}>
+              {step}
+            </div>
+            {idx < project.diagram.length - 1 && (
+              <div className="hidden md:block absolute top-1/2 -right-3 w-3 h-px" style={{ backgroundColor: "var(--accent-2)" }} />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const DroneProjectDetail = ({ project }) => (
+    <motion.div
+      key={project.id}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 18 }}
+      transition={{ duration: 0.25 }}
+      className="w-full"
+    >
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5 mb-8">
+        <div className="max-w-3xl">
+          <p className="eyebrow mb-4">{project.eyebrow}</p>
+          <h3 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-4" style={{ color: "var(--text-primary)" }}>
+            {project.name}
+          </h3>
+          <p className="text-sm md:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            {project.summary}
+          </p>
+        </div>
+        <button
+          className="btn-ghost px-5 py-2 text-sm self-start"
+          onClick={() => setActiveDroneProject(null)}
+        >
+          Back to projects
+        </button>
+      </div>
+
+      <div className="grid lg:grid-cols-[1.08fr_0.92fr] gap-6">
+        <div className="rounded-xl border p-5 md:p-6" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--glass-bg)" }}>
+          <p className="font-mono-ui text-[11px] uppercase tracking-[0.2em] mb-3" style={{ color: "var(--text-secondary)" }}>
+            What it does
+          </p>
+          <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: "var(--text-primary)" }}>
+            {project.role}
+          </p>
+          <ul className="space-y-4">
+            {project.highlights.map((item, idx) => (
+              <li key={idx} className="grid grid-cols-[28px_1fr] gap-3">
+                <span className="font-mono-ui text-xs pt-0.5" style={{ color: "var(--text-secondary)" }}>
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm md:text-[15px] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-4">
+          <DroneProjectDiagram project={project} />
+          <div className="rounded-xl border p-4" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--glass-bg)" }}>
+            <p className="font-mono-ui text-[11px] uppercase tracking-[0.2em] mb-4" style={{ color: "var(--text-secondary)" }}>
+              Stack
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.stack.map((item) => (
+                <span key={item} className="font-mono-ui px-3 py-1.5 rounded-full text-[10px] uppercase tracking-wider border" style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}>
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-xl border p-4" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--glass-bg)" }}>
+            <p className="font-mono-ui text-[11px] uppercase tracking-[0.2em] mb-4" style={{ color: "var(--text-secondary)" }}>
+              Signals
+            </p>
+            <ul className="space-y-2">
+              {project.metrics.map((metric) => (
+                <li key={metric} className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                  {metric}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  const ResearchProjectDetail = ({ project }) => (
+    <motion.div
+      key={project.id}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 18 }}
+      transition={{ duration: 0.25 }}
+      className="w-full"
+    >
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5 mb-8">
+        <div className="max-w-3xl">
+          <p className="eyebrow mb-4">{project.eyebrow}</p>
+          <h3 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-4" style={{ color: "var(--text-primary)" }}>
+            {project.name}
+          </h3>
+          <p className="text-sm md:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            {project.summary}
+          </p>
+        </div>
+        <button
+          className="btn-ghost px-5 py-2 text-sm self-start"
+          onClick={() => setActiveResearchProject(null)}
+        >
+          Back to projects
+        </button>
+      </div>
+
+      <div className="grid lg:grid-cols-[1.08fr_0.92fr] gap-6">
+        <div className="rounded-xl border p-5 md:p-6" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--glass-bg)" }}>
+          <p className="font-mono-ui text-[11px] uppercase tracking-[0.2em] mb-3" style={{ color: "var(--text-secondary)" }}>
+            What it does
+          </p>
+          <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: "var(--text-primary)" }}>
+            {project.role}
+          </p>
+          <ul className="space-y-4">
+            {project.highlights.map((item, idx) => (
+              <li key={idx} className="grid grid-cols-[28px_1fr] gap-3">
+                <span className="font-mono-ui text-xs pt-0.5" style={{ color: "var(--text-secondary)" }}>
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm md:text-[15px] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-solid inline-flex mt-7 px-5 py-2 text-sm"
+            >
+              View Project
+            </a>
+          )}
+        </div>
+
+        <div className="space-y-4">
+          <DroneProjectDiagram project={project} />
+          <div className="rounded-xl border p-4" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--glass-bg)" }}>
+            <p className="font-mono-ui text-[11px] uppercase tracking-[0.2em] mb-4" style={{ color: "var(--text-secondary)" }}>
+              Stack
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.stack.map((item) => (
+                <span key={item} className="font-mono-ui px-3 py-1.5 rounded-full text-[10px] uppercase tracking-wider border" style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}>
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-xl border p-4" style={{ borderColor: "var(--glass-border)", backgroundColor: "var(--glass-bg)" }}>
+            <p className="font-mono-ui text-[11px] uppercase tracking-[0.2em] mb-4" style={{ color: "var(--text-secondary)" }}>
+              Signals
+            </p>
+            <ul className="space-y-2">
+              {project.metrics.map((metric) => (
+                <li key={metric} className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                  {metric}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 
   return (
@@ -226,7 +426,11 @@ export default function MoreWork({ theme }) {
           <motion.div
             key={card.id}
             className="glow-card relative p-6 shadow-md cursor-pointer flex flex-col justify-center items-center transition"
-            onClick={() => setActiveCard(card.id)}
+            onClick={() => {
+              setActiveDroneProject(null);
+              setActiveResearchProject(null);
+              setActiveCard(card.id);
+            }}
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
             whileHover={{ scale: 1.05 }}
@@ -262,82 +466,159 @@ export default function MoreWork({ theme }) {
           >
             <button
               className="btn-solid fixed top-5 right-6 z-30 px-5 py-2 text-sm"
-              onClick={() => setActiveCard(null)}
+              onClick={() => {
+                setActiveDroneProject(null);
+                setActiveResearchProject(null);
+                setActiveCard(null);
+              }}
             >
               Close ✕
             </button>
 
             {activeCard === "projects" && (
-              <div className="flex flex-col gap-8 max-w-5xl mx-auto">
-                {projects.map((p, idx) => (
-                  <div key={idx} className="p-6 rounded-2xl shadow-md text-left transition" style={{ backgroundColor: "var(--bg-secondary)", border: "1px solid var(--glass-border)" }}>
-                    <h4 className="text-2xl font-semibold mb-3" style={{ color: "var(--text-primary)" }}>{p.name}</h4>
-                    <ul className="list-disc list-inside mb-3 space-y-1" style={{ color: "var(--text-secondary)" }}>
-                      {p.desc.map((d, i) => (
-                        <li key={i}>{d}</li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {p.skills.map((s, i) => (
-                        <span key={i} className="font-mono-ui px-3 py-1 rounded-full text-[11px] uppercase tracking-wider border" style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}>
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                    {p.link && (
-                      <div className="flex justify-end mt-4">
-                        <a
-                          href={p.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-solid px-5 py-2 text-sm"
-                        >
-                          View Project
-                        </a>
+              <div className="w-full max-w-6xl mx-auto text-left">
+                <AnimatePresence mode="wait">
+                  {selectedResearchProject ? (
+                    <ResearchProjectDetail project={selectedResearchProject} />
+                  ) : (
+                    <motion.div
+                      key="research-project-list"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <p className="eyebrow mb-4">Research systems</p>
+                      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
+                        <div>
+                          <h3 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-4" style={{ color: "var(--text-primary)" }}>
+                            Research & Academic Projects
+                          </h3>
+                          <p className="max-w-3xl text-sm md:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                            Medical imaging, explainable AI, human-in-the-loop model repair, and urban simulation work from academic collaborations.
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap gap-2 md:justify-end">
+                          {["Medical AI", "XAI", "Simulation", "Deep learning"].map((item) => (
+                            <span key={item} className="font-mono-ui px-3 py-1.5 rounded-full text-[10px] uppercase tracking-wider border" style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}>
+                              {item}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    )}
-                  </div>
-                ))}
+
+                      <div className="grid md:grid-cols-2 gap-5">
+                        {projects.map((project, idx) => (
+                          <motion.button
+                            key={project.id}
+                            type="button"
+                            onClick={() => setActiveResearchProject(project.id)}
+                            className="glow-card text-left p-5 md:p-6 min-h-[300px] flex flex-col justify-between"
+                            initial={{ opacity: 0, y: 18 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.08 }}
+                            whileHover={{ y: -4 }}
+                          >
+                            <div>
+                              <p className="font-mono-ui text-[10px] uppercase tracking-[0.2em] mb-5" style={{ color: "var(--text-secondary)" }}>
+                                {project.eyebrow}
+                              </p>
+                              <h4 className="font-display font-medium text-2xl mb-4" style={{ color: "var(--text-primary)" }}>
+                                {project.name}
+                              </h4>
+                              <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                                {project.summary}
+                              </p>
+                            </div>
+                            <div className="mt-8 flex items-center justify-between gap-4">
+                              <span className="font-mono-ui text-[10px] uppercase tracking-[0.18em]" style={{ color: "var(--text-secondary)" }}>
+                                Open details
+                              </span>
+                              <span className="w-9 h-9 rounded-full border flex items-center justify-center transition-transform" style={{ borderColor: "var(--glass-border)", color: "var(--text-primary)" }}>
+                                {"->"}
+                              </span>
+                            </div>
+                          </motion.button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             )}
 
             {activeCard === "photography" && <PhotographySection />}
 
             {activeCard === "drones" && (
-              <motion.div
-                className="text-left max-w-4xl mx-auto p-4 rounded-2xl shadow-lg space-y-6"
-                style={{ backgroundColor: "var(--bg-secondary)", border: "1px solid var(--glass-border)" }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-              >
-                <p className="mb-4" style={{ color: "var(--text-secondary)" }}>{dronesAutomation.description}</p>
-
-                <ul className="space-y-3">
-                  {dronesAutomation.bullets.map((item, idx) => (
-                    <motion.li
-                      key={idx}
-                      className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: -15 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
+              <div className="w-full max-w-6xl mx-auto text-left">
+                <AnimatePresence mode="wait">
+                  {selectedDroneProject ? (
+                    <DroneProjectDetail project={selectedDroneProject} />
+                  ) : (
+                    <motion.div
+                      key="drone-project-list"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.25 }}
                     >
-                      <span className="font-bold" style={{ color: "var(--accent)" }}>•</span>
-                      <span style={{ color: "var(--text-secondary)" }} dangerouslySetInnerHTML={{ __html: item }} />
-                    </motion.li>
-                  ))}
-                </ul>
+                      <p className="eyebrow mb-4">Weevilsdrone systems</p>
+                      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
+                        <div>
+                          <h3 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-4" style={{ color: "var(--text-primary)" }}>
+                            Drones & Automation
+                          </h3>
+                          <p className="max-w-3xl text-sm md:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                            Work with Weevilsdrone as Strategic Advisor and AI Engineer across the GANDIVA counter-drone stack: assignment intelligence, ground control, and authenticated friendly-drone telemetry.
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap gap-2 md:justify-end">
+                          {["Orange Cube", "Here4 GPS", "P900 telemetry", "MAVLink"].map((item) => (
+                            <span key={item} className="font-mono-ui px-3 py-1.5 rounded-full text-[10px] uppercase tracking-wider border" style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}>
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
 
-                <h4 className="font-semibold mt-4" style={{ color: "var(--text-primary)" }}>{dronesAutomation.subheading}</h4>
-
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {dronesAutomation.subbullets.map((item, idx) => (
-                    <span key={idx} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: "var(--ai-bubble-bg)", color: "var(--text-primary)" }}>
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+                      <div className="grid lg:grid-cols-3 gap-5">
+                        {droneProjects.map((project, idx) => (
+                          <motion.button
+                            key={project.id}
+                            type="button"
+                            onClick={() => setActiveDroneProject(project.id)}
+                            className="glow-card text-left p-5 md:p-6 min-h-[300px] flex flex-col justify-between"
+                            initial={{ opacity: 0, y: 18 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.08 }}
+                            whileHover={{ y: -4 }}
+                          >
+                            <div>
+                              <p className="font-mono-ui text-[10px] uppercase tracking-[0.2em] mb-5" style={{ color: "var(--text-secondary)" }}>
+                                {project.eyebrow}
+                              </p>
+                              <h4 className="font-display font-medium text-2xl mb-4" style={{ color: "var(--text-primary)" }}>
+                                {project.name}
+                              </h4>
+                              <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                                {project.summary}
+                              </p>
+                            </div>
+                            <div className="mt-8 flex items-center justify-between gap-4">
+                              <span className="font-mono-ui text-[10px] uppercase tracking-[0.18em]" style={{ color: "var(--text-secondary)" }}>
+                                Open details
+                              </span>
+                              <span className="w-9 h-9 rounded-full border flex items-center justify-center transition-transform" style={{ borderColor: "var(--glass-border)", color: "var(--text-primary)" }}>
+                                {"->"}
+                              </span>
+                            </div>
+                          </motion.button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             )}
 
             {lightboxIndex !== null && (
@@ -350,7 +631,8 @@ export default function MoreWork({ theme }) {
               >
                 <motion.img
                   key={lightboxIndex}
-                  src={photos[lightboxIndex].media.m.replace("_m", "_b")}
+                  src={photographyPhotos[lightboxIndex].full}
+                  alt={photographyPhotos[lightboxIndex].alt}
                   className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -371,7 +653,7 @@ export default function MoreWork({ theme }) {
                   </button>
                 )}
 
-                {lightboxIndex < photos.length - 1 && (
+                {lightboxIndex < photographyPhotos.length - 1 && (
                   <button
                     className="absolute right-4 text-white text-4xl"
                     onClick={(e) => {

@@ -96,7 +96,7 @@ export default function Contact({ theme }) {
           <p className="eyebrow mb-6">Get in touch</p>
           <a
             href="mailto:budha2011@gmail.com"
-            className="font-display font-medium text-4xl sm:text-5xl md:text-7xl tracking-tight inline-block transition-opacity hover:opacity-70 break-all"
+            className="font-display font-medium text-3xl sm:text-5xl md:text-7xl tracking-tight inline-block transition-opacity hover:opacity-70 break-words"
             style={{ color: "var(--text-primary)" }}
           >
             Let&apos;s build something.

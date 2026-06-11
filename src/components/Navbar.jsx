@@ -1,10 +1,19 @@
+import { useState, useEffect } from "react";
+
 export default function Navbar({ mode, setMode, theme, setTheme, resetAI, activeSection }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   const handleLogoClick = () => {
     setMode("classic");
+    setMobileOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // Close the mobile menu when leaving classic mode
+  useEffect(() => {
+    if (mode !== "classic") setMobileOpen(false);
+  }, [mode]);
 
   const links = [
     { href: "#about", id: "about", label: "About" },
@@ -55,7 +64,26 @@ export default function Navbar({ mode, setMode, theme, setTheme, resetAI, active
         )}
 
         {/* Controls */}
-        <div className="flex items-center gap-3 md:gap-4">
+        <div className="flex items-center gap-2.5 md:gap-4">
+          {/* Mobile menu toggle (classic mode only) */}
+          {mode === "classic" && (
+            <button
+              onClick={() => setMobileOpen((o) => !o)}
+              className="md:hidden p-2 rounded-full transition-colors"
+              aria-label="Toggle menu"
+              style={{ color: "var(--text-primary)" }}
+            >
+              {mobileOpen ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+                </svg>
+              )}
+            </button>
+          )}
           {/* CV Download */}
           <a
             href="/cv.pdf"
@@ -111,6 +139,44 @@ export default function Navbar({ mode, setMode, theme, setTheme, resetAI, active
           </div>
         </div>
       </div>
+
+      {/* Mobile dropdown menu */}
+      {mode === "classic" && mobileOpen && (
+        <div
+          className="md:hidden absolute left-0 right-0 top-full hairline-b px-5 py-4"
+          style={{
+            backgroundColor: "color-mix(in srgb, var(--bg-primary) 96%, transparent)",
+            backdropFilter: "blur(14px)",
+          }}
+        >
+          <ul className="flex flex-col gap-1 font-mono-ui text-[12px] uppercase tracking-[0.18em]">
+            {links.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block py-2.5 transition-colors"
+                  style={{
+                    color: activeSection === link.id ? "var(--text-primary)" : "var(--text-secondary)",
+                  }}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li className="pt-3 hairline-t mt-2">
+              <a
+                href="/cv.pdf"
+                download="Budhaditya_Mukhopadhyay_CV.pdf"
+                onClick={() => setMobileOpen(false)}
+                className="btn-solid inline-flex items-center px-4 py-2 text-[11px] uppercase tracking-[0.15em]"
+              >
+                Download CV ↓
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }

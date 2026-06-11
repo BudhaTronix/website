@@ -129,9 +129,9 @@ export default function Hero({ theme, setMode, setIsEasterEgg, isEasterEgg }) {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center px-6 md:px-10 pt-28 pb-12 max-w-6xl mx-auto"
+      className="min-h-screen flex flex-col justify-center px-6 md:px-10 pt-24 md:pt-28 pb-12 max-w-6xl mx-auto"
     >
-      <div className="grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center w-full">
+      <div className="grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-center w-full">
         {/* Left: editorial copy */}
         <div className="text-left">
           <motion.p {...fadeUp(0)} className="eyebrow mb-6">
@@ -209,7 +209,7 @@ export default function Hero({ theme, setMode, setIsEasterEgg, isEasterEgg }) {
             opacity: 1
           } : { opacity: 1, scale: 1 }}
           transition={isReverseMorphing ? { duration: 0.8, ease: "easeInOut" } : { duration: 0.8, delay: isEasterEgg ? 0 : 0.25 }}
-          className={`w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 rounded-2xl object-cover justify-self-start lg:justify-self-end border cursor-pointer transition-shadow hover:shadow-[0_0_40px_var(--accent-glow)] ${isReverseMorphing ? 'relative z-50 pointer-events-none' : ''}`}
+          className={`order-first lg:order-none w-40 h-40 sm:w-52 sm:h-52 lg:w-72 lg:h-72 rounded-2xl object-cover justify-self-start lg:justify-self-end border cursor-pointer transition-shadow hover:shadow-[0_0_40px_var(--accent-glow)] ${isReverseMorphing ? 'relative z-50 pointer-events-none' : ''}`}
           style={{ borderColor: "var(--hairline)" }}
         />
       </div>
