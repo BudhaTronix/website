@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import knowledge from "../data/knowledge.json";
 import Reveal from "./ui/Reveal";
@@ -39,6 +40,20 @@ export default function Projects({ theme }) {
     return () => {
       document.body.style.overflow = "auto";
     };
+  }, [activeCard, lightboxIndex]);
+
+  // Escape closes the lightbox first, then the modal
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key !== "Escape") return;
+      if (lightboxIndex !== null) {
+        setLightboxIndex(null);
+      } else if (activeCard) {
+        setActiveCard(null);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [activeCard, lightboxIndex]);
 
   const projects = [
@@ -288,6 +303,7 @@ export default function Projects({ theme }) {
         ))}
       </div>
 
+      {createPortal(
       <AnimatePresence>
         {activeCard && (
           <motion.div
@@ -295,14 +311,14 @@ export default function Projects({ theme }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] flex flex-col p-8 overflow-auto backdrop-blur-xl"
+            className="fixed inset-0 z-[10000] flex flex-col px-6 md:px-8 pb-8 pt-20 overflow-auto backdrop-blur-xl"
             style={{ backgroundColor: "var(--bg-primary)" }}
           >
             <button
-              className="btn-solid self-end px-5 py-2 mb-6 text-sm"
+              className="btn-solid fixed top-5 right-6 z-30 px-5 py-2 text-sm"
               onClick={() => setActiveCard(null)}
             >
-              Close
+              Close ✕
             </button>
 
             {activeCard === "projects" && (
@@ -424,7 +440,9 @@ export default function Projects({ theme }) {
             )}
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
+      )}
     </section>
   );
 }
