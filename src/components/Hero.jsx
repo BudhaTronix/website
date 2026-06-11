@@ -270,7 +270,7 @@ export default function Hero({ theme, setMode, setIsEasterEgg, isEasterEgg }) {
               <img
                 src={company.logo}
                 alt={company.name}
-                className="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-lg bg-white p-2 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                className="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-lg bg-white p-2 transition-all duration-300"
               />
 
               <AnimatePresence>
