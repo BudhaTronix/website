@@ -1,46 +1,27 @@
-import { motion } from "framer-motion";
+import Reveal from "./ui/Reveal";
 
 export default function About() {
   const paragraphs = [
-    "Hi! I'm Budhaditya Mukhopadhyay, an AI Engineer specializing in audio processing. I hold a Master’s degree in Data Science from Otto von Guericke University.",
-    "I focus on implementing, evaluating, and optimizing Machine Learning and Deep Learning algorithms, with particular expertise in medical image processing and computer vision.",
-    "Currently, I serve as a Strategic Advisor to Weevils Drones, an emerging UAV company in India, supporting AI-driven innovation, international partnerships, and strategic growth opportunities.",
-    "Previously, I gained 4.5 years of professional experience in IT, primarily focused on implementing web services using TIBCO products."
-  ];
-
-  const highlightWords = [
-    "AI Engineer",
-    "Machine Learning",
-    "Deep Learning",
-    "medical image processing",
-    "Strategic Advisor",
-    "Weevils Drones"
+    "I'm a Senior AI Engineer at VisionHealth GmbH in Munich, where I own the end-to-end AI architecture for audio and video healthcare applications — from data strategy and model training to on-device deployment of compact, real-time deep learning models that support clinical trials and the Kata inhalation app.",
+    "Beyond healthcare, I build GenAI systems — local-first LLM tooling, agent workflows, and AI-powered developer tools — and hold a Master's degree in Data and Knowledge Engineering from Otto von Guericke University Magdeburg.",
+    "I also serve as a Strategic Advisor to Weevils Drones, an emerging UAV company, where I design the software architecture for AI-powered drone systems and mentor a team of interns on AI, engineering, and product thinking.",
+    "Across 9+ years I've shipped AI and software in healthcare, automotive research at Volkswagen, medical computer vision at DZNE and OVGU, and enterprise systems — with 3 peer-reviewed publications in medical AI and explainability, and 10 students mentored along the way."
   ];
 
   return (
-    <section
-      id="about"
-      className="py-20 px-6 max-w-4xl mx-auto text-center transition-colors"
-      style={{ backgroundColor: "var(--bg-primary)" }}
-    >
-      <h2 className="text-3xl md:text-5xl font-bold mb-10" style={{ color: "var(--text-primary)" }}>About Me</h2>
+    <section id="about" className="py-24 px-6 md:px-10 max-w-6xl mx-auto text-left transition-colors">
+      <Reveal>
+        <p className="eyebrow mb-4">00 — About</p>
+        <h2 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-14" style={{ color: "var(--text-primary)" }}>
+          The short <span style={{ color: "var(--text-secondary)" }}>version</span>
+        </h2>
+      </Reveal>
 
-      <div className="space-y-6 leading-relaxed text-left" style={{ color: "var(--text-secondary)" }}>
+      <div className="grid md:grid-cols-2 gap-x-14 gap-y-8 leading-relaxed text-[15px] md:text-base" style={{ color: "var(--text-secondary)" }}>
         {paragraphs.map((p, idx) => (
-          <motion.p
-            key={idx}
-            whileHover={{ scale: 1.02, y: -3 }}
-            transition={{ type: "spring", stiffness: 120, damping: 12 }}
-            className="transition-all duration-300 cursor-pointer"
-          >
-            {p.split(new RegExp(`(${highlightWords.join("|")})`, "g")).map((text, i) =>
-              highlightWords.includes(text) ? (
-                <span key={i} className="font-semibold" style={{ color: "var(--accent)" }}>{text}</span>
-              ) : (
-                text
-              )
-            )}
-          </motion.p>
+          <Reveal key={idx} delay={idx * 0.05}>
+            <p className="hairline-t pt-6">{p}</p>
+          </Reveal>
         ))}
       </div>
     </section>

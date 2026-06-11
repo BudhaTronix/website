@@ -209,7 +209,11 @@ Example: budha --experience --oneline`;
         return `${latestRole.title} @ ${current.company} (${latestRole.period})\n${latestRole.bullets.map(b => `• ${b}`).join("\n")}`;
 
       case "skills":
-        const allSkills = [...new Set(knowledge.experience.flatMap(exp => exp.roles.flatMap(r => r.skills)))];
+        if (knowledge.skills_grouped) {
+          if (verbosity === "oneline") return knowledge.skills_grouped.flatMap(g => g.items).join(", ");
+          return knowledge.skills_grouped.map(g => `${g.group.toUpperCase()}\n${g.items.map(s => `  • ${s}`).join("\n")}`).join("\n\n");
+        }
+        const allSkills = [...new Set(knowledge.experience.flatMap(exp => exp.roles.flatMap(r => r.skills || [])))];
         if (verbosity === "oneline") return allSkills.join(", ");
         return allSkills.map(s => `• ${s}`).join("\n");
 

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import PublishedPapers from "./components/PublishedPapers";
@@ -78,7 +79,7 @@ function ClassicContent({ theme, activeSection, setActiveSection, setMode, setIs
     };
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const sections = ["hero", "about", "projects", "skills", "published-papers", "services"];
+    const sections = ["hero", "about", "experience", "projects", "skills", "published-papers", "services"];
     
     // Give it a small tick to ensure DOM is ready
     const timer = setTimeout(() => {
@@ -96,20 +97,24 @@ function ClassicContent({ theme, activeSection, setActiveSection, setMode, setIs
 
   return (
     <>
-      <Hero theme={theme} setMode={setMode} setIsEasterEgg={setIsEasterEgg} isEasterEgg={isEasterEgg} />
-      <About theme={theme} />
-      <Projects theme={theme} />
-      <Contact theme={theme} />
-      <Skills theme={theme} />
-      <PublishedPapers theme={theme} />
-      <Footer theme={theme} />
+      <div className="aurora-bg" aria-hidden="true" />
+      <div className="relative z-10">
+        <Hero theme={theme} setMode={setMode} setIsEasterEgg={setIsEasterEgg} isEasterEgg={isEasterEgg} />
+        <About theme={theme} />
+        <Experience theme={theme} />
+        <Projects theme={theme} />
+        <Skills theme={theme} />
+        <PublishedPapers theme={theme} />
+        <Contact theme={theme} />
+        <Footer theme={theme} />
+      </div>
     </>
   );
 }
 
 function App() {
-  const [mode, setMode] = useState("ai"); // 'ai' or 'classic'
-  const [theme, setTheme] = useState("light"); // 'dark' or 'light'
+  const [mode, setMode] = useState("classic"); // 'classic', 'ai', or 'dev'
+  const [theme, setTheme] = useState("dark"); // 'dark' or 'light'
   const [messages, setMessages] = useState([]);
   const [activeSection, setActiveSection] = useState("hero");
   const [isEasterEgg, setIsEasterEgg] = useState(false);

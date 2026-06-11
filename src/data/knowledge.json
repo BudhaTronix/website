@@ -3,10 +3,91 @@
     "full_name": "Budhaditya Mukhopadhyay",
     "short_name": "Budhaditya",
     "correct_spelling": "Budhaditya",
-    "title": "Senior AI Engineer & Strategic Advisor",
-    "tagline": "Specializing in Audio-based Healthcare AI, Computer Vision, and Lifelong UAV Intelligence",
-    "bio": "AI Engineer with over 7 years of deep technical experience in Machine Learning, Computer Vision, and Signal Processing. A lifelong enthusiast of Drones and UAVs, Budhaditya has integrated AI and ML into real-time drone systems since early in his career."
+    "title": "Senior AI Engineer at VisionHealth GmbH & Strategic Advisor at Weevils Drones",
+    "tagline": "Senior AI Engineer · GenAI & Edge AI · Strategic Advisor — UAV & AI Innovation",
+    "bio": "Senior AI Engineer based in Munich with 9+ years of experience across healthcare AI, GenAI, edge/on-device inference, computer vision, and AI-powered UAV systems. He owns end-to-end ML systems — data strategy, model development, validation, and production deployment — has published 3 peer-reviewed papers in medical AI and explainability, and mentors 10 students across VisionHealth and Weevils Drones."
   },
+  "metrics": [
+    { "value": "≈97%", "label": "Inhalation-model accuracy" },
+    { "value": "~16 MB", "label": "On-device model size" },
+    { "value": "~200 ms", "label": "Real-time inference" },
+    { "value": "2", "label": "Clinical trials supported" },
+    { "value": "~2,300", "label": "Kata app users" },
+    { "value": "3", "label": "Peer-reviewed publications" },
+    { "value": "10", "label": "Students mentored" },
+    { "value": "9+", "label": "Years of experience" }
+  ],
+  "profile_snapshot": {
+    "location": "Munich, Germany",
+    "relocation": "Open to relocation within Germany",
+    "residency": "Permanent residency (PR) holder",
+    "work_mode": "Open to remote, hybrid, and onsite",
+    "languages": ["English (native)", "Bengali (native)", "Hindi (fluent)", "German (preparing B1)"],
+    "mentoring": "10 students mentored — 3 master students at VisionHealth, 7 interns at Weevils Drones"
+  },
+  "projects": [
+    {
+      "name": "RemoteLlama",
+      "tag": "GenAI",
+      "description": "Local-first Next.js web app for connecting to a remote Ollama server — ChatGPT-like UI with streaming responses, API proxying to bypass CORS, file upload & text extraction (pdf, docx, csv...), and local persistence.",
+      "stack": ["Next.js 15", "TypeScript", "Tailwind", "Ollama", "IndexedDB"],
+      "github": "https://github.com/BudhaTronix/RemoteLlama"
+    },
+    {
+      "name": "AI Repo Analyzer",
+      "tag": "GenAI",
+      "description": "Production-ready FastAPI + Gradio app that clones and analyzes public GitHub repositories — architecture insights, dependency breakdowns, risk suggestions, diagrams, and downloadable Markdown reports with optional LLM enrichment.",
+      "stack": ["Python", "FastAPI", "Gradio", "Graphviz", "Docker", "CI"],
+      "github": "https://github.com/BudhaTronix/ai-repo-analyzer"
+    },
+    {
+      "name": "CareerCrawler",
+      "tag": "GenAI",
+      "description": "AI-powered job discovery and career intelligence platform — job scraping & normalization, market analysis, deterministic job ranking, CV/LinkedIn skill-gap analysis, learning recommendations, and a guarded auto-apply engine.",
+      "stack": ["Python", "FastAPI", "Gradio", "SQLite", "APScheduler"],
+      "github": "https://github.com/BudhaTronix/career-crawler"
+    },
+    {
+      "name": "JarvisFlow",
+      "tag": "GenAI",
+      "description": "Gesture-controlled brainstorming app — MediaPipe hand tracking in the browser drives a floating mind-map of topic nodes, with full keyboard/mouse accessibility fallbacks and a clean OpenAI service hook for LLM-driven topic expansion.",
+      "stack": ["React", "Vite", "TypeScript", "MediaPipe", "FastAPI"],
+      "github": "https://github.com/BudhaTronix/JarvisFlow"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Towards Segmenting the Invisible: An End-to-End Registration and Segmentation Framework for Weakly Supervised Tumour Analysis",
+      "venue": "AIBIO 2025 · Springer CCIS vol. 2696, pp. 229–242",
+      "year": "2026",
+      "authorship": "First author",
+      "desc": "An end-to-end registration and segmentation framework for weakly supervised liver tumour analysis, using inter-modal image registration (MRI→CT) and cross-modality supervision. The registration-assisted pipeline achieved a Dice score of 0.72 for healthy liver anatomy on the CHAOS dataset, and the paper analyses the limits of cross-modal supervision when target pathology lacks visual features in the target modality.",
+      "link": "https://doi.org/10.1007/978-3-032-17216-7_18"
+    },
+    {
+      "title": "An Automated Tongue Tracker for Quantifying Bulbar Function in ALS",
+      "venue": "Frontiers in Neurology, vol. 13",
+      "year": "2022",
+      "authorship": "Co-first author",
+      "desc": "Bulbar symptoms, including difficulty swallowing and speaking, are common in amyotrophic lateral sclerosis (ALS) and other neurological disorders. This work presents an automated, accessible, quantitative method to measure bulbar function in patients using computer vision and convolutional neural networks for tongue tracking.",
+      "link": "https://doi.org/10.3389/fneur.2022.838191"
+    },
+    {
+      "title": "TorchEsegeta: Framework for Interpretability and Explainability of Image-Based Deep Learning Models",
+      "venue": "Applied Sciences, 12(4), 1834",
+      "year": "2022",
+      "authorship": "Co-author",
+      "desc": "Clinicians are often sceptical about applying deep learning in practice due to its black-box nature. TorchEsegeta presents approaches that help interpret and explain the results of deep learning algorithms for 2D/3D image-based models, integrating multiple XAI methods into one pipeline. Budhaditya contributed pipeline and GUI development.",
+      "link": "https://www.mdpi.com/2076-3417/12/4/1834"
+    }
+  ],
+  "skills_grouped": [
+    { "group": "AI / ML", "items": ["PyTorch", "TensorFlow", "TensorFlow.js", "Computer Vision", "Audio AI", "Medical Imaging", "Temporal Modeling", "Explainable AI (XAI)"] },
+    { "group": "GenAI / LLM", "items": ["Ollama", "OpenAI-compatible APIs", "LLM Integration", "Agent Workflows", "FastAPI", "Gradio"] },
+    { "group": "Edge / Mobile", "items": ["On-device Inference", "Real-time Inference", "Model Optimization", "React Native"] },
+    { "group": "MLOps / Backend", "items": ["Docker", "CI/CD", "Multi-GPU Training", "Flask", "Data Pipelines", "API Development"] },
+    { "group": "Languages", "items": ["Python", "TypeScript", "JavaScript", "C++ (exposure)"] }
+  ],
   "personal": {
     "hobbies": [
       {
@@ -22,8 +103,9 @@
   },
   "contact": {
     "email": "budha2011@gmail.com",
-    "linkedin": "https://linkedin.com/in/budhaditya",
-    "github": "https://github.com/sanmitramukherjee",
+    "linkedin": "https://www.linkedin.com/in/budhadityamukhopadhyay",
+    "github": "https://github.com/BudhaTronix",
+    "scholar": "https://scholar.google.com/citations?hl=en&user=UyFDbHAAAAAJ",
     "location": "Munich, Germany (Hybrid / Remote)"
   },
   "education": [
@@ -237,6 +319,14 @@
     {
       "question": "Tell me about his medical AI experience.",
       "answer": "Budhaditya has extensive experience in medical AI, specifically at VisionHealth where he leads ML for audio-based healthcare, and at DZNE where he developed lip and tongue tracking pipelines for speech assistance. He also worked on MRI/CT scan blur detection at OVGU."
+    },
+    {
+      "question": "What GenAI projects has he built?",
+      "answer": "Budhaditya has built several GenAI projects: RemoteLlama (a local-first Next.js chat UI for remote Ollama models with streaming and file ingestion), AI Repo Analyzer (FastAPI + Gradio app that analyzes GitHub repos with LLM enrichment), CareerCrawler (an AI job-intelligence platform with skill-gap analysis), and JarvisFlow (a gesture-controlled brainstorming app using MediaPipe hand tracking with an OpenAI extension hook). All are on his GitHub: github.com/BudhaTronix."
+    },
+    {
+      "question": "What papers has he published?",
+      "answer": "Budhaditya has 3 peer-reviewed publications: 'Towards Segmenting the Invisible' (first author, AIBIO 2025 / Springer), 'An Automated Tongue Tracker for Quantifying Bulbar Function in ALS' (co-first author, Frontiers in Neurology 2022), and 'TorchEsegeta' (co-author, Applied Sciences 2022). See his Google Scholar profile for details."
     }
   ]
 }
