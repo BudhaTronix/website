@@ -194,8 +194,7 @@ export default function Projects({ theme }) {
         href="https://www.flickr.com/photos/203002715@N07/with/54860413158"
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-10 inline-block text-white px-6 py-3 rounded-lg hover:opacity-90 transition shadow-lg"
-        style={{ backgroundColor: "var(--accent)" }}
+        className="btn-solid mt-10 inline-block px-6 py-3 text-sm"
       >
         View More on Flickr →
       </a>
@@ -203,62 +202,65 @@ export default function Projects({ theme }) {
   );
 
   return (
-    <section id="projects" className="py-20 px-6 text-center transition-colors">
-      <h2 className="font-display text-3xl md:text-5xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>
-        Projects &amp; <span className="gradient-text">Expertise</span>
-      </h2>
-      <p className="mb-12 max-w-2xl mx-auto text-sm md:text-base" style={{ color: "var(--text-secondary)" }}>
-        Recent GenAI builds — all open source on GitHub — plus my research and creative work.
-      </p>
+    <section id="projects" className="py-24 px-6 md:px-10 max-w-6xl mx-auto text-left transition-colors">
+      <Reveal>
+        <p className="eyebrow mb-4">02 — Selected work</p>
+        <h2 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-4" style={{ color: "var(--text-primary)" }}>
+          Projects <span style={{ color: "var(--text-secondary)" }}>&amp; expertise</span>
+        </h2>
+        <p className="mb-14 max-w-xl text-sm md:text-base" style={{ color: "var(--text-secondary)" }}>
+          Recent GenAI builds — all open source on GitHub — plus research and creative work.
+        </p>
+      </Reveal>
 
-      {/* GenAI project grid */}
-      <div className="grid sm:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16 text-left">
+      {/* GenAI case-study rows */}
+      <div className="mb-20">
         {knowledge.projects.map((p, idx) => (
-          <Reveal key={p.name} delay={idx * 0.07}>
-            <div className="glow-card p-6 h-full flex flex-col">
-              <div className="flex items-start justify-between gap-3 mb-2">
-                <h3 className="font-display text-xl font-bold" style={{ color: "var(--text-primary)" }}>{p.name}</h3>
-                <span
-                  className="shrink-0 px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-white"
-                  style={{ background: "var(--gradient-accent)" }}
-                >
-                  {p.tag}
-                </span>
+          <Reveal key={p.name}>
+            <a
+              href={p.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="case-row group block py-8 md:py-9 grid md:grid-cols-[200px_1fr_auto] gap-4 md:gap-10 items-start"
+            >
+              <div className="font-mono-ui text-[11px] uppercase tracking-[0.18em] pt-1.5" style={{ color: "var(--text-secondary)" }}>
+                {String(idx + 1).padStart(2, "0")} · {p.tag}
               </div>
-              <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: "var(--text-secondary)" }}>
-                {p.description}
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {p.stack.map((s, i) => (
-                  <span
-                    key={i}
-                    className="px-2.5 py-0.5 rounded-full text-[11px] border"
-                    style={{ backgroundColor: "var(--glass-bg)", borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}
-                  >
-                    {s}
-                  </span>
-                ))}
+              <div>
+                <h3 className="font-display font-medium text-xl md:text-2xl mb-2 transition-transform duration-300 group-hover:translate-x-1" style={{ color: "var(--text-primary)" }}>
+                  {p.name}
+                </h3>
+                <p className="text-sm md:text-[15px] leading-relaxed max-w-2xl mb-3" style={{ color: "var(--text-secondary)" }}>
+                  {p.description}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {p.stack.map((s, i) => (
+                    <span
+                      key={i}
+                      className="font-mono-ui px-2.5 py-1 rounded-full text-[10px] uppercase tracking-wider border"
+                      style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <a
-                href={p.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-semibold self-start transition hover:translate-x-1"
-                style={{ color: "var(--accent)" }}
+              <div
+                className="hidden md:flex w-10 h-10 rounded-full border items-center justify-center transition-all duration-300 group-hover:rotate-45"
+                style={{ borderColor: "var(--glass-border)", color: "var(--text-primary)" }}
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                View on GitHub →
-              </a>
-            </div>
+                ↗
+              </div>
+            </a>
           </Reveal>
         ))}
       </div>
 
-      <h3 className="font-display text-xl md:text-2xl font-semibold mb-8" style={{ color: "var(--text-primary)" }}>
-        More of my work
-      </h3>
+      <Reveal>
+        <p className="eyebrow mb-8">More of my work</p>
+      </Reveal>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
         {cards.map((card, idx) => (
           <motion.div
             key={card.id}
@@ -276,8 +278,8 @@ export default function Projects({ theme }) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 text-white text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap z-10"
-                style={{ backgroundColor: "var(--ai-bubble-bg)", border: "1px solid var(--glass-border)", color: "var(--text-primary)" }}
+                className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap z-10"
+                style={{ backgroundColor: "var(--bg-secondary)", border: "1px solid var(--glass-border)", color: "var(--text-primary)" }}
               >
                 {card.hoverText}
               </motion.div>
@@ -297,8 +299,7 @@ export default function Projects({ theme }) {
             style={{ backgroundColor: "var(--bg-primary)" }}
           >
             <button
-              className="self-end text-white px-4 py-2 rounded-lg mb-6 hover:opacity-90 transition"
-              style={{ backgroundColor: "var(--accent)" }}
+              className="btn-solid self-end px-5 py-2 mb-6 text-sm"
               onClick={() => setActiveCard(null)}
             >
               Close
@@ -316,7 +317,7 @@ export default function Projects({ theme }) {
                     </ul>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {p.skills.map((s, i) => (
-                        <span key={i} className="text-white px-3 py-1 rounded-full text-sm" style={{ backgroundColor: "var(--accent)" }}>
+                        <span key={i} className="font-mono-ui px-3 py-1 rounded-full text-[11px] uppercase tracking-wider border" style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}>
                           {s}
                         </span>
                       ))}
@@ -327,8 +328,7 @@ export default function Projects({ theme }) {
                           href={p.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-white px-4 py-2 rounded-lg hover:opacity-90 transition"
-                          style={{ backgroundColor: "var(--accent)" }}
+                          className="btn-solid px-5 py-2 text-sm"
                         >
                           View Project
                         </a>

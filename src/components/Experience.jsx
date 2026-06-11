@@ -1,140 +1,93 @@
 import knowledge from "../data/knowledge.json";
 import Reveal from "./ui/Reveal";
 
-const logoMap = {
-  "VisionHealth GmbH": "/images/companies/visionhealth.png",
-  "Weevils Drones": "/images/companies/weevils.png",
-  "Volkswagen AG": "/images/companies/Volkswagen.png",
-  "Otto-von-Guericke University Magdeburg": "/images/companies/ottovon.png",
-  "DZNE (German Center for Neurodegenerative Diseases)": "/images/companies/dzne.png",
-  "Cognizant": "/images/companies/cognizant.png",
-  "Ericsson": "/images/companies/Ericsson.png",
-};
-
-function TimelineNode({ children, delay = 0 }) {
-  return (
-    <div className="relative pl-10 md:pl-14 pb-12 last:pb-0">
-      {/* spine */}
-      <div
-        className="absolute left-[11px] md:left-[15px] top-2 bottom-0 w-px"
-        style={{ background: "linear-gradient(to bottom, var(--accent), var(--accent-2), transparent)" }}
-      />
-      {/* node dot */}
-      <div
-        className="absolute left-0 md:left-1 top-1.5 w-[23px] h-[23px] rounded-full border-2 flex items-center justify-center"
-        style={{ borderColor: "var(--accent)", backgroundColor: "var(--bg-primary)", boxShadow: "0 0 12px var(--accent-glow)" }}
-      >
-        <div className="w-2 h-2 rounded-full" style={{ background: "var(--gradient-accent)" }} />
-      </div>
-      <Reveal delay={delay}>{children}</Reveal>
-    </div>
-  );
-}
-
-function RoleBlock({ role }) {
-  return (
-    <div className="mt-4 first:mt-0">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h4 className="font-display font-semibold text-base md:text-lg" style={{ color: "var(--text-primary)" }}>
-          {role.title}
-        </h4>
-        <span className="text-xs md:text-sm font-medium" style={{ color: "var(--accent)" }}>{role.period}</span>
-      </div>
-      <ul className="mt-2 space-y-1.5 text-sm md:text-[15px] text-left" style={{ color: "var(--text-secondary)" }}>
-        {role.bullets.slice(0, 3).map((b, i) => (
-          <li key={i} className="flex gap-2">
-            <span style={{ color: "var(--accent)" }}>▸</span>
-            <span>{b}</span>
-          </li>
-        ))}
-      </ul>
-      {role.skills && (
-        <div className="flex flex-wrap gap-1.5 mt-3">
-          {role.skills.slice(0, 6).map((s, i) => (
-            <span
-              key={i}
-              className="px-2.5 py-0.5 rounded-full text-[11px] border"
-              style={{ backgroundColor: "var(--glass-bg)", borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}
-            >
-              {s}
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-6 transition-colors">
-      <h2 className="font-display text-3xl md:text-5xl font-bold mb-4 text-center" style={{ color: "var(--text-primary)" }}>
-        Experience &amp; <span className="gradient-text">Education</span>
-      </h2>
-      <p className="text-center mb-14 max-w-2xl mx-auto text-sm md:text-base" style={{ color: "var(--text-secondary)" }}>
-        9+ years across healthcare AI, GenAI, UAV systems, automotive research, and enterprise software.
-      </p>
+    <section id="experience" className="py-24 px-6 md:px-10 max-w-6xl mx-auto">
+      <Reveal>
+        <p className="eyebrow mb-4">01 — Career</p>
+        <h2 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-14 text-left" style={{ color: "var(--text-primary)" }}>
+          Experience <span style={{ color: "var(--text-secondary)" }}>&amp; Education</span>
+        </h2>
+      </Reveal>
 
-      <div className="max-w-3xl mx-auto">
+      <div>
         {knowledge.experience.map((company, idx) => (
-          <TimelineNode key={idx} delay={0.05}>
-            <div className="glow-card p-5 md:p-6 text-left">
-              <div className="flex items-center gap-3 mb-1">
-                {logoMap[company.company] && (
-                  <img
-                    src={logoMap[company.company]}
-                    alt={company.company}
-                    className="w-9 h-9 object-contain rounded-md bg-white p-1"
-                  />
-                )}
-                <div>
-                  <h3 className="font-display font-bold text-lg md:text-xl leading-tight" style={{ color: "var(--text-primary)" }}>
-                    {company.company}
-                  </h3>
-                  {company.location && (
-                    <span className="text-xs" style={{ color: "var(--text-secondary)" }}>{company.location}</span>
-                  )}
+          <Reveal key={idx}>
+            <div className="case-row py-8 md:py-10 grid md:grid-cols-[200px_1fr] gap-4 md:gap-10 text-left">
+              {/* Left: period + company */}
+              <div>
+                <div className="font-mono-ui text-[11px] uppercase tracking-[0.18em] mb-2" style={{ color: "var(--text-secondary)" }}>
+                  {company.roles[company.roles.length - 1].period.split(" - ")[0]} — {company.roles[0].period.split(" - ")[1] || "Present"}
                 </div>
+                <div className="font-display font-semibold text-lg leading-snug" style={{ color: "var(--text-primary)" }}>
+                  {company.company}
+                </div>
+                {company.location && (
+                  <div className="text-xs mt-1" style={{ color: "var(--text-secondary)" }}>{company.location}</div>
+                )}
               </div>
-              <div className="mt-3">
+
+              {/* Right: roles */}
+              <div className="space-y-6">
                 {company.roles.map((role, rIdx) => (
-                  <div key={rIdx} className={rIdx > 0 ? "pt-4 mt-4 border-t" : ""} style={rIdx > 0 ? { borderColor: "var(--glass-border)" } : undefined}>
-                    <RoleBlock role={role} />
+                  <div key={rIdx}>
+                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-2">
+                      <h3 className="font-display font-medium text-base md:text-lg" style={{ color: "var(--text-primary)" }}>
+                        {role.title}
+                      </h3>
+                      <span className="font-mono-ui text-[10px] uppercase tracking-[0.15em]" style={{ color: "var(--text-secondary)" }}>
+                        {role.period}
+                      </span>
+                    </div>
+                    <ul className="space-y-1.5 text-sm md:text-[15px] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                      {role.bullets.slice(0, 3).map((b, i) => (
+                        <li key={i} className="flex gap-3">
+                          <span style={{ color: "var(--text-primary)" }}>—</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    {role.skills && (
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {role.skills.slice(0, 6).map((s, i) => (
+                          <span
+                            key={i}
+                            className="font-mono-ui px-2.5 py-1 rounded-full text-[10px] uppercase tracking-wider border"
+                            style={{ borderColor: "var(--glass-border)", color: "var(--text-secondary)" }}
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
-          </TimelineNode>
+          </Reveal>
         ))}
 
-        {/* Education divider */}
-        <div className="relative pl-10 md:pl-14 pb-10">
-          <div
-            className="absolute left-[11px] md:left-[15px] top-0 bottom-0 w-px"
-            style={{ background: "linear-gradient(to bottom, transparent, var(--accent-2))" }}
-          />
-          <span
-            className="font-display text-sm font-semibold tracking-widest uppercase"
-            style={{ color: "var(--accent-2)" }}
-          >
-            Education
-          </span>
-        </div>
-
+        {/* Education */}
+        <Reveal>
+          <p className="eyebrow pt-12 pb-6 text-left">Education</p>
+        </Reveal>
         {knowledge.education.map((edu, idx) => (
-          <TimelineNode key={`edu-${idx}`} delay={0.05}>
-            <div className="glow-card p-5 md:p-6 text-left">
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="font-display font-bold text-lg md:text-xl" style={{ color: "var(--text-primary)" }}>
-                  {edu.institution}
-                </h3>
-                <span className="text-xs md:text-sm font-medium" style={{ color: "var(--accent)" }}>{edu.period}</span>
+          <Reveal key={`edu-${idx}`}>
+            <div className="case-row py-8 grid md:grid-cols-[200px_1fr] gap-4 md:gap-10 text-left">
+              <div className="font-mono-ui text-[11px] uppercase tracking-[0.18em]" style={{ color: "var(--text-secondary)" }}>
+                {edu.period}
               </div>
-              <p className="mt-1 text-sm md:text-[15px]" style={{ color: "var(--text-secondary)" }}>
-                {edu.degree}{edu.location ? ` · ${edu.location}` : ""}
-              </p>
+              <div>
+                <h3 className="font-display font-medium text-base md:text-lg mb-1" style={{ color: "var(--text-primary)" }}>
+                  {edu.degree}
+                </h3>
+                <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                  {edu.institution}{edu.location ? ` · ${edu.location}` : ""}
+                </p>
+              </div>
             </div>
-          </TimelineNode>
+          </Reveal>
         ))}
       </div>
     </section>
