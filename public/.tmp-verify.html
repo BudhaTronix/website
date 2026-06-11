@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<body style="margin:0;display:flex;gap:8px">
+<iframe id="a" src="/" style="width:390px;height:1400px;border:1px solid #333"></iframe>
+<iframe id="b" src="/" style="width:390px;height:1400px;border:1px solid #333"></iframe>
+<script>
+  // right iframe: open the hamburger menu after load
+  setTimeout(() => {
+    try {
+      const d = document.getElementById("b").contentWindow.document;
+      const btn = d.querySelector('button[aria-label="Toggle menu"]');
+      if (btn) btn.click();
+    } catch (e) { document.title = "ERR " + e.message; }
+  }, 2500);
+</script>
+</body>
+</html>
