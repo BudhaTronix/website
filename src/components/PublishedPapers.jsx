@@ -1,168 +1,73 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import knowledge from "../data/knowledge.json";
+import Reveal from "./ui/Reveal";
 
 export default function PublishedPapers({ theme }) {
-  const papers = [
-    {
-      title: "An Automated Tongue Tracker for Quantifying Bulbar Function in ALS",
-      desc: "Introduction: Bulbar symptoms, including difficulty swallowing and speaking, are common in amyotrophic lateral sclerosis (ALS) and other neurological disorders, such as stroke. The presence of bulbar symptoms provides important information regarding clinical outcomes, such as survival time after diagnosis. Nevertheless, there are currently no easily accessible, quantitative methods to measure bulbar function in patients....",
-      link: "https://doi.org/10.3389/fneur.2022.838191",
-    },
-    {
-      title: "TorchEsegeta: Framework for Interpretability and Explainability of Image-Based Deep Learning Models",
-      desc: "Clinicians are often very sceptical about applying automatic image processing approaches, especially deep learning-based methods, in practice. One main reason for this is the black-box nature of these approaches and the inherent problem of missing insights of the automatically derived decisions. In order to increase trust in these methods, this paper presents approaches that help to interpret and explain the results of deep learning algorithms...",
-      link: "https://www.mdpi.com/2076-3417/12/4/1834",
-    },
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
+  const papers = knowledge.publications;
 
   return (
-    <section id="published-papers" className="py-16 md:py-20 px-4 sm:px-6 relative transition-colors" style={{ backgroundColor: "var(--bg-primary)" }}>
-      <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center" style={{ color: "var(--text-primary)" }}>Published Papers</h2>
+    <section id="published-papers" className="py-24 px-6 md:px-10 max-w-6xl mx-auto text-left transition-colors">
+      <Reveal>
+        <p className="eyebrow mb-4">04 — Research</p>
+        <h2 className="font-display font-medium text-3xl md:text-5xl tracking-tight mb-14" style={{ color: "var(--text-primary)" }}>
+          Published <span style={{ color: "var(--text-secondary)" }}>papers</span>
+        </h2>
+      </Reveal>
 
-      <div className="flex flex-col md:flex-row max-w-5xl mx-auto relative gap-6">
-        {/* Navigation */}
-        <div className="flex md:flex-col items-center md:items-start">
-          <h4 className="font-semibold mb-0 md:mb-4 mr-4 md:mr-0 text-sm md:text-base whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>View Papers</h4>
-          <div className="flex md:flex-col gap-2">
-            {papers.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveIndex(idx)}
-                className={`w-9 h-9 md:w-8 md:h-8 rounded-full text-sm font-semibold border-2 flex-shrink-0 transition ${
-                  idx === activeIndex
-                    ? "border-blue-500 text-blue-500 drop-shadow-[0_0_6px_#3b82f6]"
-                    : "border-gray-600 text-gray-400 hover:border-blue-400 hover:text-blue-400"
-                } flex items-center justify-center`}
-                style={{
-                  borderColor: idx === activeIndex ? "var(--accent)" : "var(--glass-border)",
-                  color: idx === activeIndex ? "var(--accent)" : "var(--text-secondary)",
-                }}
-              >
-                {idx + 1}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Cards */}
-        <div className="relative flex-1">
-          {/* Mobile */}
-          <div className="md:hidden">
-            <motion.div
-              key={activeIndex}
-              className="relative w-full rounded-2xl min-h-fit
-                flex flex-col justify-start p-4 text-left
-                backdrop-blur-2xl border transition-all
-                shadow-[0_0_25px_rgba(0,0,0,0.1)]"
-              style={{ backgroundColor: "var(--glass-bg)", borderColor: "var(--glass-border)" }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      <div>
+        {papers.map((paper, idx) => (
+          <Reveal key={idx}>
+            <a
+              href={paper.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="case-row group block py-8 md:py-9 grid md:grid-cols-[200px_1fr_auto] gap-4 md:gap-10 items-start"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent blur-2xl opacity-60 pointer-events-none"></div>
-              
-              <div className="absolute top-2 left-3 font-bold text-base z-10" style={{ color: "var(--text-secondary)" }}>
-                {activeIndex + 1}
+              <div className="pt-1">
+                <div className="font-mono-ui text-[11px] uppercase tracking-[0.18em] mb-2" style={{ color: "var(--text-secondary)" }}>
+                  {paper.year}
+                </div>
+                <span
+                  className="font-mono-ui inline-block px-2.5 py-1 rounded-full text-[10px] uppercase tracking-wider border"
+                  style={{ borderColor: "var(--text-primary)", color: "var(--text-primary)" }}
+                >
+                  {paper.authorship}
+                </span>
               </div>
 
-              <h3 className="text-lg font-bold mb-2 relative z-10 pr-8 pt-4 leading-snug" style={{ color: "var(--text-primary)" }}>
-                {papers[activeIndex].title}
-              </h3>
+              <div>
+                <h3 className="font-display font-medium text-lg md:text-xl leading-snug mb-2 transition-transform duration-300 group-hover:translate-x-1" style={{ color: "var(--text-primary)" }}>
+                  {paper.title}
+                </h3>
+                <p className="font-mono-ui text-[11px] uppercase tracking-[0.12em] mb-3" style={{ color: "var(--text-secondary)" }}>
+                  {paper.venue}
+                </p>
+                <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "var(--text-secondary)" }}>
+                  {paper.desc}
+                </p>
+              </div>
 
-              <div className="w-full h-px my-1 z-10" style={{ background: "linear-gradient(to right, transparent, var(--accent), transparent)" }}></div>
-              
-              <p className="text-sm mb-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                {papers[activeIndex].desc}
-              </p>
-
-              {papers[activeIndex].link && (
-                <a
-                  href={papers[activeIndex].link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white px-3 py-2 rounded-lg hover:opacity-90 transition-colors text-sm font-medium self-start"
-                  style={{ backgroundColor: "var(--accent)" }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  View Paper
-                </a>
-              )}
-            </motion.div>
-          </div>
-
-          {/* Desktop */}
-          <div className="hidden md:block relative h-96">
-            {papers.map((paper, idx) => {
-              const isActive = idx === activeIndex;
-              const offset = idx - activeIndex;
-
-              return (
-                <motion.div
-                  key={idx}
-                  className={`
-                    absolute left-0 w-full rounded-2xl cursor-pointer 
-                    ${isActive ? 'h-auto' : 'h-56 overflow-hidden pointer-events-none'}
-                    flex flex-col justify-start p-6 text-left
-                    backdrop-blur-2xl border transition-all
-                    shadow-[0_0_25px_rgba(0,0,0,0.1)]
-                  `}
-                  style={{ 
-                    zIndex: isActive ? 20 : 20 - Math.abs(offset),
-                    backgroundColor: "var(--glass-bg)",
-                    borderColor: "var(--glass-border)" 
-                  }}
-                  initial={{ scale: 0.95, y: 30 * offset + 16, opacity: 0.9 }}
-                  animate={{
-                    scale: isActive ? 1 : 0.95,
-                    y: 30 * offset + 16,
-                    opacity: 1,
-                  }}
-                  whileHover={{
-                    scale: isActive ? 1.02 : 0.97,
-                  }}
-                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent blur-2xl opacity-60 pointer-events-none"></div>
-                  
-                  <div className="absolute top-2 left-3 font-bold text-lg z-10" style={{ color: "var(--text-secondary)" }}>
-                    {idx + 1}
-                  </div>
-
-                  <h3 className="text-xl font-bold mb-2 relative z-10 pr-8 pt-4 leading-snug" style={{ color: "var(--text-primary)" }}>
-                    {paper.title}
-                  </h3>
-
-                  {isActive && (
-                    <>
-                      <div className="w-full h-px my-1 z-10" style={{ background: "linear-gradient(to right, transparent, var(--accent), transparent)" }}></div>
-                      
-                      <p className="text-base mb-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                        {paper.desc}
-                      </p>
-
-                      {paper.link && (
-                        <a
-                          href={paper.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-white px-4 py-2 rounded-lg hover:opacity-90 transition-colors text-sm font-medium self-start inline-block"
-                          style={{ backgroundColor: "var(--accent)" }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          View Paper
-                        </a>
-                      )}
-                    </>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
+              <div
+                className="hidden md:flex w-10 h-10 rounded-full border items-center justify-center transition-all duration-300 group-hover:rotate-45"
+                style={{ borderColor: "var(--glass-border)", color: "var(--text-primary)" }}
+              >
+                ↗
+              </div>
+            </a>
+          </Reveal>
+        ))}
       </div>
+
+      <Reveal>
+        <a
+          href={knowledge.contact.scholar}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono-ui inline-flex items-center gap-2 mt-10 text-[11px] uppercase tracking-[0.18em] transition hover:translate-x-1"
+          style={{ color: "var(--text-primary)" }}
+        >
+          View all on Google Scholar →
+        </a>
+      </Reveal>
     </section>
   );
 }

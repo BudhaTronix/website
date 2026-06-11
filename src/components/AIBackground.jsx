@@ -93,16 +93,15 @@ export default function AIBackground({ theme }) {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        // Even brighter blue in dark, black in light
-        ctx.fillStyle = theme === "dark" 
-          ? "rgba(120, 180, 255, 1)" 
+        // Monochrome particles: white in dark, black in light
+        ctx.fillStyle = theme === "dark"
+          ? "rgba(245, 245, 244, 0.9)"
           : "rgba(0, 0, 0, 0.7)";
         ctx.fill();
-        
-        // Brighter glow for the blue dots in dark mode
+
         if (theme === "dark") {
           ctx.shadowBlur = 6;
-          ctx.shadowColor = "rgba(120, 180, 255, 0.9)";
+          ctx.shadowColor = "rgba(245, 245, 244, 0.7)";
         } else {
           ctx.shadowBlur = 0;
         }
@@ -139,7 +138,7 @@ export default function AIBackground({ theme }) {
             const opacity = 1 - distance / connectionDistance;
             ctx.strokeStyle =
               theme === "dark"
-                ? `rgba(79, 142, 247, ${opacity * 0.35})`
+                ? `rgba(245, 245, 244, ${opacity * 0.25})`
                 : `rgba(0, 0, 0, ${opacity * 0.2})`;
             ctx.lineWidth = 1;
             ctx.stroke();

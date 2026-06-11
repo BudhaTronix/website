@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AIBackground from "./AIBackground";
+import CurrentFocusCard from "./CurrentFocusCard";
 import FloatingQuestions from "./FloatingQuestions";
 import { streamChat } from "../utils/chat";
 
 const suggestionChips = [
   { label: "About", query: "Who is Budhaditya?" },
+  { label: "GenAI Projects", query: "What GenAI projects have you built?" },
   { label: "Expertise", query: "Tell me about your drone work." },
   { label: "Skills", query: "What is your tech stack?" },
   { label: "Papers", query: "What research have you published?" },
@@ -38,7 +40,6 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
   const sendingRef = useRef(false);
   const [isMorphing, setIsMorphing] = useState(false);
   const [detailLevel, setDetailLevel] = useState(3);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const [isSliderHovered, setIsSliderHovered] = useState(false);
 
   const clickTimer = useRef(null);
@@ -72,6 +73,10 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
     }
   };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
 
   const handleSend = async (text) => {
     if (sendingRef.current) return;
@@ -91,8 +96,6 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsTyping(true);
-    setHasInteracted(false);
-
     // LLM handles all matching with full context and custom detail level
     let aiResponse = "";
     
@@ -123,7 +126,12 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
   };
 
   return (
-    <div className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden transition-colors" style={{ backgroundColor: "var(--bg-primary)" }}>
+    <div
+      className={`relative w-full flex flex-col items-center justify-center overflow-x-hidden transition-colors ${
+        messages.length === 0 ? "min-h-screen overflow-y-auto py-28 sm:py-32" : "h-screen overflow-hidden"
+      }`}
+      style={{ backgroundColor: "var(--bg-primary)" }}
+    >
       <AIBackground theme={theme} />
       
       {/* Floating Back/Home Button */}
@@ -138,7 +146,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
             className="fixed top-24 left-6 z-[50] flex items-center gap-3 px-4 py-2 rounded-2xl border backdrop-blur-3xl shadow-2xl group transition-all"
             style={{ backgroundColor: "var(--glass-bg)", borderColor: "var(--glass-border)", color: "var(--text-primary)" }}
           >
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center transition-colors" style={{ backgroundColor: "var(--glass-bg)" }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
@@ -188,7 +196,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
               </motion.h1>
               
               <motion.img
-                src="/images/ProfilePicture.png"
+                src="/images/photo.png"
                 alt="Budhaditya"
                 onClick={handleProfileClick}
                 initial={{ scale: isEasterEgg ? 1 : 0.8, opacity: isEasterEgg ? 1 : 0 }}
@@ -208,7 +216,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                   opacity: { duration: 0.5 },
                   y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
                 }}
-                className={`w-24 h-24 md:w-32 md:h-32 rounded-full object-cover mb-6 border-2 shadow-xl ring-4 ring-blue-500/10 cursor-pointer hover:shadow-[0_0_20px_var(--accent-glow)] transition-shadow ${isMorphing ? 'z-50 pointer-events-none' : ''}`}
+                className={`w-24 h-24 md:w-32 md:h-32 rounded-full object-cover mb-6 border-2 shadow-xl cursor-pointer hover:shadow-[0_0_20px_var(--accent-glow)] transition-shadow ${isMorphing ? 'z-50 pointer-events-none' : ''}`}
                 style={{ borderColor: "var(--accent)" }}
               />
 
@@ -218,7 +226,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                 className="text-base sm:text-xl md:text-2xl font-medium transition-all duration-700" 
                 style={{ color: "var(--text-secondary)", animationDelay: isMorphing ? "0s" : "0.4s" }}
               >
-                AI Engineer · Strategic Advisor · Python Dev
+                Senior AI Engineer · GenAI &amp; Edge AI · Strategic Advisor
               </motion.p>
             </motion.div>
           ) : (
@@ -242,7 +250,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                     <div className="flex flex-col gap-1.5 max-w-[85%]">
                       {msg.role === "assistant" && msg.level && (
                         <div className="flex items-center gap-1.5 ml-1">
-                          <div className="w-1 h-1 rounded-full bg-blue-500" />
+                          <div className="w-1 h-1 rounded-full" style={{ backgroundColor: "var(--accent)" }} />
                           <span className="text-[9px] font-black uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>
                             LVL:{msg.level}
                           </span>
@@ -253,7 +261,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                         style={{
                           backgroundColor:
                             msg.role === "user" ? "var(--user-bubble-bg)" : "var(--ai-bubble-bg)",
-                          color: msg.role === "user" ? "#ffffff" : "var(--text-primary)",
+                          color: msg.role === "user" ? "var(--bg-primary)" : "var(--text-primary)",
                           borderColor: msg.role === "assistant" ? "var(--glass-border)" : "transparent",
                           borderRadius: msg.role === "user" ? "1.25rem 0.25rem 1.25rem 1.25rem" : "0.25rem 1.25rem 1.25rem 1.25rem"
                         }}
@@ -321,7 +329,7 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
               }}
               placeholder="Ask anything about me"
               className={`w-full backdrop-blur border transition-all rounded-2xl p-4 pr-16 outline-none resize-none h-14 sm:h-16 md:h-20 shadow-[0_0_15px_rgba(0,0,0,0.1)] ${
-                isTyping ? "opacity-50 pointer-events-none" : "hover:border-blue-500/50 focus:border-blue-500 focus:shadow-[0_0_20px_var(--accent-glow)]"
+                isTyping ? "opacity-50 pointer-events-none" : "hover:border-[var(--accent-2)] focus:border-[var(--accent)] focus:shadow-[0_0_20px_var(--accent-glow)]"
               }`}
               style={{
                 backgroundColor: "var(--glass-bg)",
@@ -337,13 +345,13 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                 filter: "drop-shadow(0 0 8px var(--accent-glow))"
               }}
             >
-              <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/10 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500" />
               <svg
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="white"
+                stroke="var(--bg-primary)"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -381,8 +389,9 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
               <div className="relative flex items-center h-4 cursor-pointer">
                 {/* Slim Track */}
                 <div className="absolute w-full h-1.5 bg-black/40 rounded-full border border-white/5 overflow-hidden shadow-inner">
-                  <motion.div 
-                    className="h-full bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400"
+                  <motion.div
+                    className="h-full"
+                    style={{ background: "var(--gradient-accent)" }}
                     animate={{ width: `${(detailLevel - 1) * 25}%` }}
                     transition={{ type: "spring", stiffness: 100, damping: 20 }}
                   />
@@ -393,14 +402,14 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                   value={detailLevel} 
                   onChange={(e) => {
                     setDetailLevel(parseInt(e.target.value));
-                    setHasInteracted(true);
                   }}
                   className="absolute w-full h-full opacity-0 cursor-pointer z-10"
                 />
 
                 {/* Minimalist Thumb */}
-                <motion.div 
-                  className="absolute w-4 h-4 bg-white rounded-full shadow-lg border-2 border-blue-500 pointer-events-none"
+                <motion.div
+                  className="absolute w-4 h-4 rounded-full shadow-lg border-2 pointer-events-none"
+                  style={{ backgroundColor: "var(--accent)", borderColor: "var(--bg-primary)" }}
                   animate={{ left: `calc(${(detailLevel - 1) * 25}% - 8px)` }}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
@@ -409,17 +418,19 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
               {/* Slider Labels */}
               <div className="flex justify-between mt-2 px-1">
                 <div className="flex flex-col items-center">
-                  <span className={`text-[9px] font-black uppercase tracking-widest transition-colors duration-300 ${detailLevel === 1 ? 'text-blue-400' : 'text-zinc-500'}`}>Simple</span>
+                  <span className="text-[9px] font-black uppercase tracking-widest transition-colors duration-300" style={{ color: detailLevel === 1 ? "var(--text-primary)" : "var(--text-secondary)" }}>Simple</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-black italic text-zinc-600">LVL</span>
-                  <span className="text-sm font-black text-blue-500 font-mono">{detailLevel}</span>
+                  <span className="text-[10px] font-black italic" style={{ color: "var(--text-secondary)" }}>LVL</span>
+                  <span className="text-sm font-black font-mono" style={{ color: "var(--text-primary)" }}>{detailLevel}</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className={`text-[9px] font-black uppercase tracking-widest transition-colors duration-300 ${detailLevel === 5 ? 'text-blue-400' : 'text-zinc-500'}`}>Detailed</span>
+                  <span className="text-[9px] font-black uppercase tracking-widest transition-colors duration-300" style={{ color: detailLevel === 5 ? "var(--text-primary)" : "var(--text-secondary)" }}>Detailed</span>
                 </div>
               </div>
             </motion.div>
+
+            {messages.length === 0 && <CurrentFocusCard />}
           </motion.div>
         </div>
       </div>
