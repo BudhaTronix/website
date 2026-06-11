@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AIBackground from "./AIBackground";
+import CurrentFocusCard from "./CurrentFocusCard";
 import FloatingQuestions from "./FloatingQuestions";
 import { streamChat } from "../utils/chat";
 
@@ -39,7 +40,6 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
   const sendingRef = useRef(false);
   const [isMorphing, setIsMorphing] = useState(false);
   const [detailLevel, setDetailLevel] = useState(3);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const [isSliderHovered, setIsSliderHovered] = useState(false);
 
   const clickTimer = useRef(null);
@@ -73,6 +73,10 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
     }
   };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
 
   const handleSend = async (text) => {
     if (sendingRef.current) return;
@@ -92,8 +96,6 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsTyping(true);
-    setHasInteracted(false);
-
     // LLM handles all matching with full context and custom detail level
     let aiResponse = "";
     
@@ -124,7 +126,12 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
   };
 
   return (
-    <div className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden transition-colors" style={{ backgroundColor: "var(--bg-primary)" }}>
+    <div
+      className={`relative w-full flex flex-col items-center justify-center overflow-x-hidden transition-colors ${
+        messages.length === 0 ? "min-h-screen overflow-y-auto py-28 sm:py-32" : "h-screen overflow-hidden"
+      }`}
+      style={{ backgroundColor: "var(--bg-primary)" }}
+    >
       <AIBackground theme={theme} />
       
       {/* Floating Back/Home Button */}
@@ -395,7 +402,6 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                   value={detailLevel} 
                   onChange={(e) => {
                     setDetailLevel(parseInt(e.target.value));
-                    setHasInteracted(true);
                   }}
                   className="absolute w-full h-full opacity-0 cursor-pointer z-10"
                 />
@@ -423,6 +429,8 @@ export default function AILanding({ theme, messages, setMessages, setMode, setIs
                 </div>
               </div>
             </motion.div>
+
+            {messages.length === 0 && <CurrentFocusCard />}
           </motion.div>
         </div>
       </div>
