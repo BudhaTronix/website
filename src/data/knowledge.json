@@ -152,12 +152,13 @@
           "title": "Senior AI Engineer",
           "period": "Feb 2026 - Present",
           "bullets": [
-            "Leading end-to-end ML systems for audio-based healthcare applications",
-            "Designing and deploying on-device deep learning models in real-world conditions",
+            "Leading end-to-end ML systems for audio-based healthcare applications, deployed on-device in real-world conditions",
+            "Built hybrid inference: on-device TensorFlow.js plus a Dockerized Azure Container Apps service (HTTPS, revisions, health probes, autoscaling, Managed Identity, Azure Monitor)",
+            "Built a LangGraph/LangChain workflow that turns employee absence emails into validated records and signature-ready PDFs, pausing for human review and resuming when signed copies return",
             "Owning data strategy, model training, validation, and production deployment",
             "Collaborating cross-functionally to ship clinically reliable AI"
           ],
-          "skills": ["Artificial Intelligence (AI)", "Gen AI", "Software Development", "Deep Learning"]
+          "skills": ["Artificial Intelligence (AI)", "Gen AI", "LangGraph", "Azure", "Software Development", "Deep Learning"]
         },
         {
           "title": "AI Engineer",

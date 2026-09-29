@@ -41,7 +41,7 @@ export default async function handler(req) {
     if (userQuery.includes("volks") || userQuery.includes("vw") || userQuery.includes("motive") || userQuery.includes("car")) {
       relevantContext.volkswagen = knowledgeBase.experience.find(e => e.company.includes("Volkswagen"));
     }
-    if (userQuery.includes("vision") || userQuery.includes("health") || userQuery.includes("medical") || userQuery.includes("audio")) {
+    if (userQuery.includes("vision") || userQuery.includes("health") || userQuery.includes("medical") || userQuery.includes("audio") || userQuery.includes("azure") || userQuery.includes("langgraph")) {
       relevantContext.visionHealth = knowledgeBase.experience.find(e => e.company.includes("VisionHealth"));
     }
     if (userQuery.includes("weevil") || userQuery.includes("drone") || userQuery.includes("advisor")) {
