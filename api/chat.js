@@ -41,7 +41,7 @@ export default async function handler(req) {
     if (userQuery.includes("volks") || userQuery.includes("vw") || userQuery.includes("motive") || userQuery.includes("car")) {
       relevantContext.volkswagen = knowledgeBase.experience.find(e => e.company.includes("Volkswagen"));
     }
-    if (userQuery.includes("vision") || userQuery.includes("health") || userQuery.includes("medical") || userQuery.includes("audio")) {
+    if (userQuery.includes("vision") || userQuery.includes("health") || userQuery.includes("medical") || userQuery.includes("audio") || userQuery.includes("azure") || userQuery.includes("langgraph")) {
       relevantContext.visionHealth = knowledgeBase.experience.find(e => e.company.includes("VisionHealth"));
     }
     if (userQuery.includes("weevil") || userQuery.includes("drone") || userQuery.includes("advisor")) {
@@ -59,7 +59,7 @@ export default async function handler(req) {
     if (/paper|publication|publish|scholar|aibio|segment|tumour|tumor|research|journal|author/.test(userQuery)) {
       relevantContext.publications = knowledgeBase.publications;
     }
-    if (/genai|gen ai|llm|ollama|remotellama|jarvis|career\s?crawler|repo analyzer|project|github|agent/.test(userQuery)) {
+    if (/genai|gen ai|llm|ollama|remotellama|jarvis|medscribe|dictation|hivemind|career\s?crawler|repo analyzer|project|github|agent/.test(userQuery)) {
       relevantContext.projects = knowledgeBase.projects;
     }
     if (/language|german|english|bengali|hindi|relocat|visa|residen|mentor|teach|location|munich|remote|hybrid|onsite/.test(userQuery)) {

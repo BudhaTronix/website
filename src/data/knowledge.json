@@ -27,6 +27,20 @@
   },
   "projects": [
     {
+      "name": "MedScribe",
+      "tag": "Healthcare GenAI",
+      "description": "Local-first German/English clinical dictation: faster-whisper transcription, Pydantic-validated notes from a local LLM, and grounded RAG over Qdrant that refuses weak evidence. Engineering demo on synthetic data, not a medical device.",
+      "stack": ["Python", "FastAPI", "faster-whisper", "Qdrant", "Ollama", "Docker"],
+      "github": "https://github.com/BudhaTronix/medscribe"
+    },
+    {
+      "name": "HiveMind",
+      "tag": "Agentic AI",
+      "description": "Local-first multi-agent research system: a CEO agent plans a team, managers split the work, workers research with evidence, and verifier and QA agents challenge the result. Governed budgets, permissions, resumable runs and evals.",
+      "stack": ["Python", "asyncio", "Pydantic", "Ollama", "SQLite", "pytest"],
+      "github": "https://github.com/BudhaTronix/HiveMind"
+    },
+    {
       "name": "RemoteLlama",
       "tag": "GenAI",
       "description": "Local-first Next.js web app for connecting to a remote Ollama server — ChatGPT-like UI with streaming responses, API proxying to bypass CORS, file upload & text extraction (pdf, docx, csv...), and local persistence.",
@@ -138,12 +152,13 @@
           "title": "Senior AI Engineer",
           "period": "Feb 2026 - Present",
           "bullets": [
-            "Leading end-to-end ML systems for audio-based healthcare applications",
-            "Designing and deploying on-device deep learning models in real-world conditions",
+            "Leading end-to-end ML systems for audio-based healthcare applications, deployed on-device in real-world conditions",
+            "Built hybrid inference: on-device TensorFlow.js plus a Dockerized Azure Container Apps service (HTTPS, revisions, health probes, autoscaling, Managed Identity, Azure Monitor)",
+            "Built a LangGraph/LangChain workflow that turns employee absence emails into validated records and signature-ready PDFs, pausing for human review and resuming when signed copies return",
             "Owning data strategy, model training, validation, and production deployment",
             "Collaborating cross-functionally to ship clinically reliable AI"
           ],
-          "skills": ["Artificial Intelligence (AI)", "Gen AI", "Software Development", "Deep Learning"]
+          "skills": ["Artificial Intelligence (AI)", "Gen AI", "LangGraph", "Azure", "Software Development", "Deep Learning"]
         },
         {
           "title": "AI Engineer",
