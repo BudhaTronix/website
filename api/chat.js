@@ -59,7 +59,7 @@ export default async function handler(req) {
     if (/paper|publication|publish|scholar|aibio|segment|tumour|tumor|research|journal|author/.test(userQuery)) {
       relevantContext.publications = knowledgeBase.publications;
     }
-    if (/genai|gen ai|llm|ollama|remotellama|jarvis|career\s?crawler|repo analyzer|project|github|agent/.test(userQuery)) {
+    if (/genai|gen ai|llm|ollama|remotellama|jarvis|medscribe|dictation|hivemind|career\s?crawler|repo analyzer|project|github|agent/.test(userQuery)) {
       relevantContext.projects = knowledgeBase.projects;
     }
     if (/language|german|english|bengali|hindi|relocat|visa|residen|mentor|teach|location|munich|remote|hybrid|onsite/.test(userQuery)) {
